@@ -55,11 +55,6 @@ class BurgerBuilder extends Component {
         //finally updating the state of the price and ingredients.
         this.setState({totalPrice: newPrice, ingredients: updatedIngredients});
 
-
-
-
-
-
     }
 
     //removing ingredients from burger.
@@ -73,7 +68,6 @@ class BurgerBuilder extends Component {
         if(oldCount <= 0) {
             return;
         }
-
 
 
         //updated count is old count plus 1
@@ -122,6 +116,7 @@ class BurgerBuilder extends Component {
                  ingredientAdded={this.addIngredientHandler}
                  ingredientDeducted={this.removeIngredientHandler}
                  disabled={disableInfo}
+                 price={this.state.totalPrice}
                 />
             </Aux>
 
