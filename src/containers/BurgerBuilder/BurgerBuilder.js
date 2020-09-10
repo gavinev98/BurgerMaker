@@ -6,6 +6,11 @@ import Burger from '../../components/Burger/Burger'
 
 import BuildControls from '../../components/Burger/BuildControls/BuildControls';
 
+//adding modal component.
+import Modal from '../../components/UI/Modal/Modal';
+
+//adding order summary component.
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -25,7 +30,8 @@ class BurgerBuilder extends Component {
         },
 
         totalPrice: 4,
-        purchasable: false
+        purchasable: false,
+        purchasing: false
     };
 
     updatePurchaseStatus (ingredients) {
@@ -49,6 +55,14 @@ class BurgerBuilder extends Component {
         //setting sum to true or false based on fact if sum is greater than 0.
         this.setState({purchasable: sum > 0})
         
+    }
+
+    //handler to differentiate if the order now button was clicked.
+    //arrow functions are used for maintaining state.
+    purchaseHandler = () => {
+        
+        this.setState({purchasing: true});
+
     }
 
     //all method todo with interacting will be placed in the stateful component ie burgerbuilder
@@ -138,13 +152,19 @@ class BurgerBuilder extends Component {
 
         return(
             <Aux>
+                 <Modal show={this.state.purchasing}>
+                 <OrderSummary ingredients={this.state.ingredients} />     
+                 </Modal>
+
                 <Burger ingredients={this.state.ingredients} />
+
                 <BuildControls 
                  ingredientAdded={this.addIngredientHandler}
                  ingredientDeducted={this.removeIngredientHandler}
                  disabled={disableInfo}
                  purchasable={this.state.purchasable}
                  price={this.state.totalPrice}
+                 ordered={this.purchaseHandler}
                 />
 
             </Aux>
