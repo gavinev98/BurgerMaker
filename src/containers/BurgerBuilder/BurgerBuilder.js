@@ -24,8 +24,32 @@ class BurgerBuilder extends Component {
             meat: 0
         },
 
-        totalPrice: 4
+        totalPrice: 4,
+        purchasable: false
     };
+
+    updatePurchaseStatus (ingredients) {
+        //for the purchase button to be active there needs to be ingredients.
+        //firstly we will copy the ingredients into a new object in an immutable way.
+    /*    const ingredients = {
+            ...this.state.ingredients
+        } */
+
+        //to create array of string enteries. eg salad bacon cheese. and then we map this array to recieve key values ie the quantities.
+        //map method recieves the key.
+        //using reduce key to flatten to single number.
+        const sum = Object.keys(ingredients)
+        .map(igKey => {
+            return ingredients[igKey];
+        })
+        .reduce((sum, el) => {
+            return sum + el;
+        }, 0);
+
+        //setting sum to true or false based on fact if sum is greater than 0.
+        this.setState({purchasable: sum > 0})
+        
+    }
 
     //all method todo with interacting will be placed in the stateful component ie burgerbuilder
     //adding ingredients to the burger.
@@ -43,6 +67,7 @@ class BurgerBuilder extends Component {
 
         };
 
+        //updating the value of type chosen eg cheese bacon meat.
         updatedIngredients[type] = updatedCount;
 
         const priceAddition = INGREDIENT_PRICES[type];
@@ -54,6 +79,9 @@ class BurgerBuilder extends Component {
 
         //finally updating the state of the price and ingredients.
         this.setState({totalPrice: newPrice, ingredients: updatedIngredients});
+
+        //run method to activate purchasble button.
+        this.updatePurchaseStatus(updatedIngredients);
 
     }
 
@@ -87,13 +115,12 @@ class BurgerBuilder extends Component {
         const oldPrice = this.state.totalPrice;
         //new price is oldprice plus the new price.
         const newPrice = oldPrice - priceMinus;
-        
-        
+         
         //finally updating the state of the price and ingredients.
         this.setState({totalPrice: newPrice, ingredients: updatedIngredients});
-        
-        
-        
+         
+        //run method to activate purchasble button.
+        this.updatePurchaseStatus(updatedIngredients);
         
     }
 
@@ -116,8 +143,10 @@ class BurgerBuilder extends Component {
                  ingredientAdded={this.addIngredientHandler}
                  ingredientDeducted={this.removeIngredientHandler}
                  disabled={disableInfo}
+                 purchasable={this.state.purchasable}
                  price={this.state.totalPrice}
                 />
+
             </Aux>
 
         );
