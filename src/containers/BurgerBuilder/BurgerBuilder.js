@@ -65,6 +65,10 @@ class BurgerBuilder extends Component {
 
     }
 
+    purchaseCancelHandler = () => {
+        this.setState({purchasing: false});
+    }
+
     //all method todo with interacting will be placed in the stateful component ie burgerbuilder
     //adding ingredients to the burger.
     addIngredientHandler = (type) => {
@@ -152,7 +156,7 @@ class BurgerBuilder extends Component {
 
         return(
             <Aux>
-                 <Modal show={this.state.purchasing}>
+                 <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
                  <OrderSummary ingredients={this.state.ingredients} />     
                  </Modal>
 
