@@ -2,6 +2,10 @@ import React from 'react';
 
 import Aux from '../../../hoc/Aux';
 
+
+//importing custom button
+import Button from '../../UI/Button/Button';
+
 const orderSummary = (props) => {
     //taking in the ingredients in via props and using object.keys to etract string values.
     const ingredientSummary = Object.keys(props.ingredients)
@@ -19,6 +23,10 @@ const orderSummary = (props) => {
 
         </ul>
         <p>Continue to checkout ?</p>
+
+        <Button btnType="Danger" clicked={props.cancel}>CANCEL</Button>
+
+        <Button btnType="Success" clicked={props.continue}>CONTINUE</Button>
         </Aux>
     );
 
