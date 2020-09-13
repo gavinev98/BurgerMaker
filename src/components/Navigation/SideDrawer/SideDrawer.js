@@ -6,12 +6,19 @@ import NavigationItems from '../NavigationItems/NavigationItems';
 
 import classes from './SideDrawer.module.css';
 
+//importing backdrop
+import Backdrop from '../../UI/Backdrop/Backdrop'
+
+import Aux from '../../../hoc/Aux';
+
 
 const sideDrawer = (props) => {
     //conditionally attach different css animations open/close
 
 
     return (
+        <Aux>
+        <Backdrop show={props.open} clicked={props.closed} />
         <div className={classes.SideDrawer}>
             <div className={classes.Logo}>
             <Logo />
@@ -20,6 +27,7 @@ const sideDrawer = (props) => {
             <NavigationItems />
             </nav>
         </div>
+        </Aux>
 
     );
 
