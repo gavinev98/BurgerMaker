@@ -4,14 +4,18 @@ import Logo from '../../Logo/Logo';
 
 import NavigationItems from '../NavigationItems/NavigationItems';
 
+import classes from './SideDrawer.module.css';
+
 
 const sideDrawer = (props) => {
     //conditionally attach different css animations open/close
 
 
     return (
-        <div>
+        <div className={classes.SideDrawer}>
+            <div className={classes.Logo}>
             <Logo />
+            </div>
             <nav>
             <NavigationItems />
             </nav>
