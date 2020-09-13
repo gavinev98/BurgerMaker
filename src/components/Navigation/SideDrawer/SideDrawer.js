@@ -14,12 +14,16 @@ import Aux from '../../../hoc/Aux';
 
 const sideDrawer = (props) => {
     //conditionally attach different css animations open/close
+    let attatchedClasses =  [classes.SideDrawer, classes.Closed];
 
+    if(props.open) {
+        attatchedClasses = [classes.SideDrawer, classes.Open];
+    }
 
     return (
         <Aux>
         <Backdrop show={props.open} clicked={props.closed} />
-        <div className={classes.SideDrawer}>
+        <div className={attatchedClasses.join(' ')}>
             <div className={classes.Logo}>
             <Logo />
             </div>
