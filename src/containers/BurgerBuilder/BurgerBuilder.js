@@ -93,7 +93,13 @@ class BurgerBuilder extends Component {
         }
         axios.post('/orders.json', order)
         .then(response => {
-            console.log(response);
+           //closed the spinner
+           this.setState({loading: false});
+
+           //alert message
+           alert("Thank you, your order was sucessful");
+           this.setState({ purchasing: false});
+
         })
         .catch(error => {
          console.log(error);
@@ -125,6 +131,7 @@ class BurgerBuilder extends Component {
         const oldPrice = this.state.totalPrice;
         //new price is oldprice plus the new price.
         const newPrice = oldPrice + priceAddition;
+        
 
 
         //finally updating the state of the price and ingredients.
@@ -200,7 +207,6 @@ class BurgerBuilder extends Component {
                  </Modal>
 
                 <Burger ingredients={this.state.ingredients} />
-
                 <BuildControls 
                  ingredientAdded={this.addIngredientHandler}
                  ingredientDeducted={this.removeIngredientHandler}
