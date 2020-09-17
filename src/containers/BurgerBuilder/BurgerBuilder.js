@@ -102,7 +102,7 @@ class BurgerBuilder extends Component {
 
         })
         .catch(error => {
-         console.log(error);
+         alert("Your order was not successful please try again");
         })
 
     }
