@@ -12,6 +12,9 @@ import Modal from '../../components/UI/Modal/Modal';
 //adding order summary component.
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
+import axios from '../../axios-order';
+
+
 const INGREDIENT_PRICES = {
     salad: 0.5,
     cheese: 0.4,
@@ -70,7 +73,29 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        alert("You continue!");
+        //positing to the firebase. creating object to store our data.
+        const order = {
+            ingredients : this.state.ingredients,
+            price: this.state.totalPrice,
+            customer: {
+                name: 'Gavin Eve',
+                address :{
+                    street : 'Test Street',
+                    zipCode : '23232'
+                },
+                email: 'test@test.com',
+
+            },
+            delivery: 'fastest'
+        }
+        axios.post('/orders.json', order)
+        .then(response => {
+            console.log(response);
+        })
+        .catch(error => {
+         console.log(error);
+        })
+
     }
 
     //all method todo with interacting will be placed in the stateful component ie burgerbuilder
