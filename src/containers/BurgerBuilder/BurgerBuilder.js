@@ -14,6 +14,8 @@ import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary';
 
 import axios from '../../axios-order';
 
+import Spinner from '../../components/UI/Modal/Spinner/Spinner';
+
 
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -34,7 +36,8 @@ class BurgerBuilder extends Component {
 
         totalPrice: 4,
         purchasable: false,
-        purchasing: false
+        purchasing: false,
+        loading: false
     };
 
     updatePurchaseStatus (ingredients) {
@@ -74,6 +77,7 @@ class BurgerBuilder extends Component {
 
     purchaseContinueHandler = () => {
         //positing to the firebase. creating object to store our data.
+        this.setState({loading : true});
         const order = {
             ingredients : this.state.ingredients,
             price: this.state.totalPrice,
@@ -84,7 +88,6 @@ class BurgerBuilder extends Component {
                     zipCode : '23232'
                 },
                 email: 'test@test.com',
-
             },
             delivery: 'fastest'
         }
@@ -183,10 +186,17 @@ class BurgerBuilder extends Component {
             }
 
 
+            let orderSummary =  <OrderSummary totalPrice={this.state.totalPrice} continue={this.purchaseContinueHandler} cancel={this.purchaseCancelHandler} ingredients={this.state.ingredients} />     
+
+            if(this.state.loading){
+                orderSummary = <Spinner />
+            }
+
+
         return(
             <Aux>
                  <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
-                 <OrderSummary totalPrice={this.state.totalPrice} continue={this.purchaseContinueHandler} cancel={this.purchaseCancelHandler} ingredients={this.state.ingredients} />     
+                 {orderSummary}
                  </Modal>
 
                 <Burger ingredients={this.state.ingredients} />
