@@ -16,6 +16,8 @@ import axios from '../../axios-order';
 
 import Spinner from '../../components/UI/Modal/Spinner/Spinner';
 
+import withErrorHandler from '../../withErrorHandler/withErrorHandler';
+
 
 const INGREDIENT_PRICES = {
     salad: 0.5,
@@ -103,6 +105,8 @@ class BurgerBuilder extends Component {
         })
         .catch(error => {
          alert("Your order was not successful please try again");
+         //hide spinner and modal
+         this.setState({loading : false, purchasing: false});
         })
 
     }
@@ -225,4 +229,4 @@ class BurgerBuilder extends Component {
 
 }
 
-export default BurgerBuilder;
+export default withErrorHandler(BurgerBuilder);
