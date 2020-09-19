@@ -33,7 +33,8 @@ class BurgerBuilder extends Component {
         totalPrice: 4,
         purchasable: false,
         purchasing: false,
-        loading: false
+        loading: false,
+        error: null
     };
 
     //method for fetching data componentdidmount
@@ -44,8 +45,10 @@ class BurgerBuilder extends Component {
                 //recieve the ingredients in the response handle null valeus also
                  this.setState({ingredients : response.data});
         
+            })
+            .catch(error => {
+                this.setState({error: true})
             });
-
     }
 
     updatePurchaseStatus (ingredients) {
@@ -202,15 +205,10 @@ class BurgerBuilder extends Component {
                 disableInfo[key] = disableInfo[key] <= 0
             }
 
+            let orderSummary = null;
 
-            let orderSummary =  <OrderSummary totalPrice={this.state.totalPrice} continue={this.purchaseContinueHandler} cancel={this.purchaseCancelHandler} ingredients={this.state.ingredients} />     
+            let burger =  this.state.error ? <p>Ingredients cant be loaded.</p> : <Spinner />;
 
-            if(this.state.loading){
-                orderSummary = <Spinner />
-            }
-
-            let burger = <Spinner />
-            
             //use conditional statement to check if we have recieved data from server or else display spinner.
             if(this.state.ingredients) {
     
@@ -229,6 +227,12 @@ class BurgerBuilder extends Component {
             </Aux>            
             );
 
+            orderSummary =  <OrderSummary totalPrice={this.state.totalPrice} continue={this.purchaseContinueHandler} cancel={this.purchaseCancelHandler} ingredients={this.state.ingredients} />
+
+        }
+
+        if(this.state.loading) {
+            orderSummary = <Spinner />;
         }
 
 
@@ -238,7 +242,7 @@ class BurgerBuilder extends Component {
                  {orderSummary}
                  </Modal>
 
-                    {burger}
+                    {burger};
 
             </Aux>
 

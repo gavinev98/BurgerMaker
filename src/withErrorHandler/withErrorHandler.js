@@ -15,7 +15,7 @@ const withErrorHandler = (WrappedComponent, axios) => {
 
 
             //checking status recieved from axios using componentdidmount
-            componentDidMount() {
+            componentWillMount() {
                 //using interceptors to check request and response at endpoints.
                 //setting error to null for each request sent.
                 axios.interceptors.request.use(req => {
