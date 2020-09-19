@@ -29,18 +29,24 @@ const INGREDIENT_PRICES = {
 class BurgerBuilder extends Component {
     //adding state to our burger builder class
     state = {
-        ingredients : {
-            salad : 0,
-            bacon: 0,
-            cheese: 0,
-            meat: 0
-        },
-
+        ingredients : null,
         totalPrice: 4,
         purchasable: false,
         purchasing: false,
         loading: false
     };
+
+    //method for fetching data componentdidmount
+    componentDidMount () {
+        axios.get('https://react-my-burger-70850.firebaseio.com/ingredients.json')
+            .then(response => {
+
+                //recieve the ingredients in the response handle null valeus also
+                 this.setState({ingredients : response.data});
+        
+            });
+
+    }
 
     updatePurchaseStatus (ingredients) {
         //for the purchase button to be active there needs to be ingredients.
@@ -203,22 +209,36 @@ class BurgerBuilder extends Component {
                 orderSummary = <Spinner />
             }
 
+            let burger = <Spinner />
+            
+            //use conditional statement to check if we have recieved data from server or else display spinner.
+            if(this.state.ingredients) {
+    
+            burger = 
+            (
+            <Aux>
+            <Burger ingredients={this.state.ingredients} />
+            <BuildControls 
+             ingredientAdded={this.addIngredientHandler}
+             ingredientDeducted={this.removeIngredientHandler}
+             disabled={disableInfo}
+             purchasable={this.state.purchasable}
+             price={this.state.totalPrice}
+             ordered={this.purchaseHandler}
+            />
+            </Aux>            
+            );
 
-        return(
+        }
+
+
+            return(
             <Aux>
                  <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
                  {orderSummary}
                  </Modal>
 
-                <Burger ingredients={this.state.ingredients} />
-                <BuildControls 
-                 ingredientAdded={this.addIngredientHandler}
-                 ingredientDeducted={this.removeIngredientHandler}
-                 disabled={disableInfo}
-                 purchasable={this.state.purchasable}
-                 price={this.state.totalPrice}
-                 ordered={this.purchaseHandler}
-                />
+                    {burger}
 
             </Aux>
 
@@ -229,4 +249,4 @@ class BurgerBuilder extends Component {
 
 }
 
-export default withErrorHandler(BurgerBuilder);
+export default withErrorHandler(BurgerBuilder, axios);

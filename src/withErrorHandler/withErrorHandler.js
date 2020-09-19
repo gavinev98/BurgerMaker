@@ -20,10 +20,11 @@ const withErrorHandler = (WrappedComponent, axios) => {
                 //setting error to null for each request sent.
                 axios.interceptors.request.use(req => {
                     this.setState({error : null});
+                    return req;
                 })
 
                 //setting error to error for each response.
-                axios.interceptors.response.use(null, error => {
+                axios.interceptors.response.use(res => res, error => {
                     this.setState({ error: error});
                 })
             }
@@ -37,8 +38,8 @@ const withErrorHandler = (WrappedComponent, axios) => {
                 return (
                     <Aux>
                     <Modal show={this.state.error}
-                            clicked={this.errorConfirmedHandler}>
-                        {this.state.error}
+                            modalClosed={this.errorConfirmedHandler}>
+                        {this.state.error ? this.state.error : null}
                     </Modal>
                     <WrappedComponent {...this.props} />
                     </Aux>
