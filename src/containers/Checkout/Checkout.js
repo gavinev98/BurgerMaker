@@ -22,6 +22,19 @@ class Checkout extends Component {
         this.props.history.replace('/checkout/contact-data');
     }
 
+    componentDidMount () {
+        //extracting query params
+        const query = new URLSearchParams(this.props.location.search);
+
+        const ingredients = {};
+
+        for(let param of query.entries()) {
+            // ['salad' , '1', 'bacon' , '1']
+            ingredients[param[0]] = +param[1];
+        }
+        this.setState({ingredients : ingredients});
+    }
+
 
     //goal is to create a checkout summary show burger,
     render() {
