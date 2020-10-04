@@ -4,6 +4,8 @@ import Button from '../../../components/UI/Button/Button'
 
 import classes from './Contact.module.css'
 
+import axios from '../../../axios-order';
+
 
 class Contact extends Component {
 
@@ -22,7 +24,7 @@ class Contact extends Component {
                 this.setState({loading : true});
                 const order = {
                     ingredients : this.props.ingredients,
-                    price: this.state.totalPrice,
+                    price: this.props.price,
                     customer: {
                         name: 'Gavin Eve',
                         address :{
@@ -40,13 +42,13 @@ class Contact extends Component {
         
                    //alert message
                    alert("Thank you, your order was sucessful");
-                   this.setState({ purchasing: false});
+          
         
                 })
                 .catch(error => {
                  alert("Your order was not successful please try again");
                  //hide spinner and modal
-                 this.setState({loading : false, purchasing: false});
+                 this.setState({loading : false});
                 })
 
     }
