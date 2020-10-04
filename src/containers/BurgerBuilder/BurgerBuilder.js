@@ -88,7 +88,7 @@ class BurgerBuilder extends Component {
 
     purchaseContinueHandler = () => {
 
-        this.props.history.push('/checkout');
+        
         //positing to the firebase. creating object to store our data.
         this.setState({loading : true});
         const order = {
@@ -119,6 +119,20 @@ class BurgerBuilder extends Component {
          //hide spinner and modal
          this.setState({loading : false, purchasing: false});
         })
+
+        const queryParams = [];
+
+        for(let i in this.state.ingredients){
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
+        }
+
+        const queryString = queryParams.join('&');
+
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + queryString
+        }
+        );
 
     }
 
