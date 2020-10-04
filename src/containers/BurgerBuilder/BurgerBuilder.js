@@ -87,6 +87,8 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
+
+        this.props.history.push('/checkout');
         //positing to the firebase. creating object to store our data.
         this.setState({loading : true});
         const order = {

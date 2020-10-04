@@ -14,12 +14,23 @@ class Checkout extends Component {
         }
     }
 
+    checkoutCancelledHander = () => {
+        this.props.history.goBack();
+    }
+
+    checkoutContinuedHandler = () => {
+
+    }
+
 
     //goal is to create a checkout summary show burger,
     render() {
         return (
             <div>
-                <CheckoutSummary ingredients={this.state.ingredients} />
+                <CheckoutSummary 
+                checkoutCancelled={} 
+                checkoutContinued={} 
+                ingredients={this.state.ingredients} />
 
 
             </div>
