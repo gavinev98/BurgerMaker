@@ -41,9 +41,9 @@ class Contact extends Component {
                 .then(response => {
                    //closed the spinner
                    this.setState({loading: false});
-        
                    //alert message
                    alert("Thank you, your order was sucessful");
+                   this.props.history.push('/');
           
         
                 })
