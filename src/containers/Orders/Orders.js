@@ -4,6 +4,8 @@ import Order from '../../components/Order/Order';
 
 import axios from '../../axios-order';
 
+import withErrorHandler from '../../withErrorHandler/withErrorHandler';
+
 
 class Orders extends Component {
 
@@ -28,9 +30,13 @@ class Orders extends Component {
                 });
             }
 
-            console.log(fetchedOrders);
+           
+
+
 
             this.setState({loading : false, orders : fetchedOrders});
+
+            console.log(fetchedOrders);
         }).catch(err => {
             this.setState({loading : false});
         })
@@ -42,11 +48,12 @@ class Orders extends Component {
 
         return(
             <div>
-                <Order />
-                <Order />
+                {this.state.orders.map(order => (
+                    <Order key={order.id} />
+                ))}
             </div>
         );
     }
 }
 
-export default Orders;
+export default withErrorHandler(Orders, axios);
