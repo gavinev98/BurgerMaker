@@ -6,6 +6,8 @@ import classes from './Contact.module.css'
 
 import axios from '../../../axios-order';
 
+import  Spinner from '../../../components/UI/Modal/Spinner/Spinner'
+
 
 class Contact extends Component {
 
@@ -54,16 +56,24 @@ class Contact extends Component {
     }
 
     render () {
+
+        let form = (
+            <form>
+            <input className={classes.Input} type="text" name="name" placeholder="Your name" />
+            <input className={classes.Input} type="email" name="email" placeholder="Your email" />
+            <input className={classes.Input} type="text" name="street" placeholder="Your street" />
+            <input className={classes.Input} type="text" name="postalcode" placeholder="Postal Code" />
+        </form>
+
+        );
+        if(this.state.loading) {
+            form = <Spinner />
+        }
+
         return (
             <div className={classes.ContactData}>
                 <h4>Enter your Contact Data</h4>
-                <form>
-                    <input className={classes.Input} type="text" name="name" placeholder="Your name" />
-                    <input className={classes.Input} type="email" name="email" placeholder="Your email" />
-                    <input className={classes.Input} type="text" name="street" placeholder="Your street" />
-                    <input className={classes.Input} type="text" name="postalcode" placeholder="Postal Code" />
-                </form>
-
+                {form}
                 <Button btnType="Success" clicked={this.orderHander}>ORDER</Button>
 
             </div>
