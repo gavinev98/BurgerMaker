@@ -23,10 +23,38 @@ class Contact extends Component {
                 },
                 value: ''
             },
-            street : 'Test Street',
-            zipCode : '23232',
-            email: 'test@test.com',
-            delivery: 'fastest'
+            street : {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your street'
+                },
+                value: ''
+            },
+            zipCode :{
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your zipcode'
+                },
+                value: ''
+            },
+            email: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'email',
+                    placeholder: 'Your email'
+                },
+                value: ''
+            },
+            delivery: {
+                elementType: 'select',
+                elementConfig: {
+                    options : [{value: 'fastest', displayValue : 'Fastest'},
+                                {value: 'cheapest', displayValue : 'Cheapest'} ]
+                },
+                value: ''
+            },
         },
         loading: false
     }
