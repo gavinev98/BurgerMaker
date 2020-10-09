@@ -98,11 +98,11 @@ class Contact extends Component {
 
         let form = (
             <form>
-            {formElementsArray.map(formElement => {
+            {formElementsArray.map(formElement => (
                 <Input elementType={formElement.config.elementType}
                         elementConfig={formElement.config.elementConfig}
                         value={formElement.config.elementConfig} /> 
-            })}
+            ))}
             <Button btnType="Success" clicked={this.orderHander}>ORDER</Button>
            
         </form>
