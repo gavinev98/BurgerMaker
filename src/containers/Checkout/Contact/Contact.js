@@ -86,13 +86,25 @@ class Contact extends Component {
     }
 
     render () {
+        //converting our order form js object to array.
+        const formElementsArray = [];
+        //looping over the keys in form to create input object ie , name, address, zipcode etc.
+        for(let key in this.state.orderForm) {
+            formElementsArray.push({
+                id: key,
+                config: this.state.orderForm[key]
+            });
+        }
 
         let form = (
             <form>
-            <Input inputtype="input"  type="text" name="name" placeholder="Your name" />
-            <Input inputtype="input" type="email" name="email" placeholder="Your email" />
-            <Input inputtype="input" type="text" name="street" placeholder="Your street" />
-            <Input inputtype="input" type="text" name="postalcode" placeholder="Postal Code" />
+            {formElementsArray.map(formElement => {
+                <Input elementType={formElement.config.elementType}
+                        elementConfig={formElement.config.elementConfig}
+                        value={formElement.config.elementConfig} /> 
+            })}
+            <Button btnType="Success" clicked={this.orderHander}>ORDER</Button>
+           
         </form>
 
         );
@@ -104,7 +116,7 @@ class Contact extends Component {
             <div className={classes.ContactData}>
                 <h4>Enter your Contact Data</h4>
                 {form}
-                <Button btnType="Success" clicked={this.orderHander}>ORDER</Button>
+              
 
             </div>
 
