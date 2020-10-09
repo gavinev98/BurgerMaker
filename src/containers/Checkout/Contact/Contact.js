@@ -85,6 +85,25 @@ class Contact extends Component {
 
     }
 
+    inputChangedHandler = (event, inputIdentifier) => {
+        //updating value of our field by getting the ID.
+        //updating in an immutable way.
+        const updatedofForm = {
+            ...this.state.orderForm
+        }
+        //getting the key that is passed to the method in immutable way.
+        const updatedFormElement = { ...updatedofForm[inputIdentifier] }
+
+        //setting value of the element to what is typed into field.
+        updatedFormElement.value = event.target.value;
+        //updating the copy of element to actual form.
+        updatedofForm[inputIdentifier] = updatedFormElement;
+        //setting state.
+        this.setState({orderForm: updatedofForm});
+
+
+    }
+
     render () {
         //converting our order form js object to array.
         const formElementsArray = [];
@@ -103,7 +122,8 @@ class Contact extends Component {
                     key={formElement.id} 
                     elementType={formElement.config.elementType}
                     elementConfig={formElement.config.elementConfig}
-                    value={formElement.config.value} /> 
+                    value={formElement.config.value}
+                    changed={(event) => this.inputChangedHandler(event, formElement.id)} /> 
             ))}
             <Button btnType="Success" clicked={this.orderHander}>ORDER</Button>
            
