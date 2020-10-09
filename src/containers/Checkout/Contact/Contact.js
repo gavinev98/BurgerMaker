@@ -53,7 +53,7 @@ class Contact extends Component {
                     options : [{value: 'fastest', displayValue : 'Fastest'},
                                 {value: 'cheapest', displayValue : 'Cheapest'} ]
                 },
-                value: ''
+                
             },
         },
         loading: false
@@ -99,9 +99,11 @@ class Contact extends Component {
         let form = (
             <form>
             {formElementsArray.map(formElement => (
-                <Input elementType={formElement.config.elementType}
-                        elementConfig={formElement.config.elementConfig}
-                        value={formElement.config.elementConfig} /> 
+                <Input 
+                    key={formElement.id} 
+                    elementType={formElement.config.elementType}
+                    elementConfig={formElement.config.elementConfig}
+                    value={formElement.config.value} /> 
             ))}
             <Button btnType="Success" clicked={this.orderHander}>ORDER</Button>
            
