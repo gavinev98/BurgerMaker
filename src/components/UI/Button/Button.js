@@ -8,6 +8,7 @@ const button = (props) => (
     //creating dynamic button so will look like 'button danger' or 'button success'
     <button
     className={[classes.Button, classes[props.btnType]].join(' ')} 
+    disabled={props.disabled}
     onClick={props.clicked}>{props.children}</button>
 
 );

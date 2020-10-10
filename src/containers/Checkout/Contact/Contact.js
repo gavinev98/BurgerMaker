@@ -9,6 +9,7 @@ import axios from '../../../axios-order';
 import  Spinner from '../../../components/UI/Modal/Spinner/Spinner';
 
 import Input from '../../../components/UI/Input/Input';
+import input from '../../../components/UI/Input/Input';
 
 
 class Contact extends Component {
@@ -75,9 +76,10 @@ class Contact extends Component {
                     options : [{value: 'fastest', displayValue : 'Fastest'},
                                 {value: 'cheapest', displayValue : 'Cheapest'} ]
                 },
-                
+                valid:true
             },
         },
+        formIsValid: false,
         loading: false
     }
 
@@ -155,7 +157,15 @@ class Contact extends Component {
         //updating the copy of element to actual form.
         updatedofForm[inputIdentifier] = updatedFormElement;
         //setting state.
-        this.setState({orderForm: updatedofForm});
+        
+        let formIsValid = true;
+
+        for(let inputIdentifier in updatedofForm) {
+            formIsValid = updatedofForm[inputIdentifier].valid && formIsValid;
+        }
+
+
+        this.setState({orderForm: updatedofForm, formIsValid: formIsValid});
 
 
     }
@@ -185,7 +195,7 @@ class Contact extends Component {
                     valueType={formElement.id}
                     changed={(event) => this.inputChangedHandler(event, formElement.id)} /> 
             ))}
-            <Button btnType="Success">ORDER</Button>
+            <Button btnType="Success" disabled={!this.state.formIsValid}>ORDER</Button>
            
         </form>
 
