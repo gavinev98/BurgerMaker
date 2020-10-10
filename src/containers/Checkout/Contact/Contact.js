@@ -68,13 +68,14 @@ class Contact extends Component {
                 const formData = {};
                 for(let formElementIdentifier in this.state.orderForm) {
                     //setting keyvalue = to the value of the key.
-                    formDate[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
+                    formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
                 }
 
 
                 const order = {
                     ingredients : this.props.ingredients,
                     price: this.props.price,
+                    orderData: formData
 
                 }
                 axios.post('/orders.json', order)
