@@ -114,7 +114,13 @@ class Contact extends Component {
 
 
     checkValidity(value, rules) {
+        let isValid = false;
 
+        if(rules.required) {
+            isValid = value.trim() !== '';
+        }
+
+        return isValid;
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
@@ -128,6 +134,10 @@ class Contact extends Component {
 
         //setting value of the element to what is typed into field.
         updatedFormElement.value = event.target.value;
+
+        //adding layer of validation.
+        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+
         //updating the copy of element to actual form.
         updatedofForm[inputIdentifier] = updatedFormElement;
         //setting state.
