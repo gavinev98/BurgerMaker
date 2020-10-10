@@ -60,8 +60,18 @@ class Contact extends Component {
     }
 
     orderHander = (event) => {
-                //positing to the firebase. creating object to store our data.
+            event.preventDefault();        
+        //positing to the firebase. creating object to store our data.
                 this.setState({loading : true});
+
+                //retrieving the data from the order form.
+                const formData = {};
+                for(let formElementIdentifier in this.state.orderForm) {
+                    //setting keyvalue = to the value of the key.
+                    formDate[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
+                }
+
+
                 const order = {
                     ingredients : this.props.ingredients,
                     price: this.props.price,
@@ -116,7 +126,7 @@ class Contact extends Component {
         }
 
         let form = (
-            <form>
+            <form onSubmit={this.orderHander}>
             {formElementsArray.map(formElement => (
                 <Input 
                     key={formElement.id} 
@@ -125,7 +135,7 @@ class Contact extends Component {
                     value={formElement.config.value}
                     changed={(event) => this.inputChangedHandler(event, formElement.id)} /> 
             ))}
-            <Button btnType="Success" clicked={this.orderHander}>ORDER</Button>
+            <Button btnType="Success">ORDER</Button>
            
         </form>
 
