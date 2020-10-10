@@ -31,3 +31,10 @@
     border: 1px solid red;
     background-color: salmon;
 }
+
+.validationErrorMsg {
+    color: red;
+    font-weight: bold;
+    font-size: 15px;
+    text-decoration: underline;
+}

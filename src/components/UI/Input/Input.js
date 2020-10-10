@@ -11,7 +11,7 @@ const input = (props) => {
 
     if(props.invalid && props.shouldValidate && props.touched) {
         inputClasses.push(classes.Invalid);
-        validationError = <p>Please ensure all fields are valid.</p>
+        validationError = <p className={classes.validationErrorMsg}>Please ensure {props.valueType} is valid value.</p>
     }
 
     //adding some checks to function body.
