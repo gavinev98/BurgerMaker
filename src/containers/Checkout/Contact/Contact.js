@@ -21,7 +21,11 @@ class Contact extends Component {
                     type: 'text',
                     placeholder: 'Your name'
                 },
-                value: ''
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false
             },
             street : {
                 elementType: 'input',
@@ -29,7 +33,11 @@ class Contact extends Component {
                     type: 'text',
                     placeholder: 'Your street'
                 },
-                value: ''
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false
             },
             zipCode :{
                 elementType: 'input',
@@ -37,7 +45,11 @@ class Contact extends Component {
                     type: 'text',
                     placeholder: 'Your zipcode'
                 },
-                value: ''
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false
             },
             email: {
                 elementType: 'input',
@@ -45,7 +57,11 @@ class Contact extends Component {
                     type: 'email',
                     placeholder: 'Your email'
                 },
-                value: ''
+                value: '',
+                validation: {
+                    required: true
+                },
+                valid: false
             },
             delivery: {
                 elementType: 'select',
@@ -93,6 +109,11 @@ class Contact extends Component {
                  //hide spinner and modal
                  this.setState({loading : false});
                 })
+
+    }
+
+
+    checkValidity(value, rules) {
 
     }
 
