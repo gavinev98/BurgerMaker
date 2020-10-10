@@ -7,8 +7,11 @@ const input = (props) => {
     let inputElement = null;
     const inputClasses = [classes.InputElement];
 
+    let validationError = null;
+
     if(props.invalid && props.shouldValidate && props.touched) {
         inputClasses.push(classes.Invalid);
+        validationError = <p>Please ensure all fields are valid.</p>
     }
 
     //adding some checks to function body.
@@ -45,6 +48,7 @@ const input = (props) => {
     <div className={classes.Input}>
         <label className={classes.Label}>{props.label}</label>
         {inputElement}
+        {validationError}
 
     </div>);
 
