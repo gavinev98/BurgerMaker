@@ -19,7 +19,7 @@ import Spinner from '../../components/UI/Modal/Spinner/Spinner';
 
 import withErrorHandler from '../../withErrorHandler/withErrorHandler';
 
-
+import * as actionTypes from '../../store/actions';
 
 
 const INGREDIENT_PRICES = {
@@ -254,11 +254,12 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         //creating two methods
-        onIngredientAdded: () => dispatch({type: })
+        onIngredientAdded: (ingName) => dispatch({type: actionTypes.ADD_INGREDIENT, ingredientName : ingName }),
+        onIngredientRemoved: (ingName) => dispatch({type: actionTypes.REMOVE_INGREDIENT, ingredientName : ingName })
 
     }
 }
 
 
 
-export default withErrorHandler(BurgerBuilder, axios);
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(BurgerBuilder, axios));
