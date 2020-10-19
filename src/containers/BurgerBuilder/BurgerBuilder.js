@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 
 import Aux from '../../hoc/Aux';
 
@@ -17,6 +18,8 @@ import axios from '../../axios-order';
 import Spinner from '../../components/UI/Modal/Spinner/Spinner';
 
 import withErrorHandler from '../../withErrorHandler/withErrorHandler';
+
+
 
 
 const INGREDIENT_PRICES = {
@@ -236,5 +239,26 @@ class BurgerBuilder extends Component {
     }
 
 }
+
+//setting up the connection to the redux stores.
+const mapStateToProps = state => {
+    return {
+
+        ing: state.ingredients
+
+    };
+}
+
+
+
+const mapDispatchToProps = dispatch => {
+    return {
+        //creating two methods
+        onIngredientAdded: () => dispatch({type: })
+
+    }
+}
+
+
 
 export default withErrorHandler(BurgerBuilder, axios);
