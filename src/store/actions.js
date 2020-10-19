@@ -1,4 +1,5 @@
-
 //creating some action types
-export const ADD_INGREDIENTS = 'ADD_INGREDIENTS';
-export const REMOVE_INGREDIENTS = 'REMOVE_INGREDIENTS';
+export const ADD_INGREDIENT = 'ADD_INGREDIENT';
+export const REMOVE_INGREDIENT = 'REMOVE_INGREDIENT';
+
+
