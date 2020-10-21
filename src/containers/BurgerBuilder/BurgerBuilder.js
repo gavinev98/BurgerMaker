@@ -22,17 +22,11 @@ import withErrorHandler from '../../withErrorHandler/withErrorHandler';
 import * as actionTypes from '../../store/actions';
 
 
-const INGREDIENT_PRICES = {
-    salad: 0.5,
-    cheese: 0.4,
-    meat: 1.3,
-    bacon: 0.7
-}
+
 
 class BurgerBuilder extends Component {
     //adding state to our burger builder class
     state = {
-        ingredients : null,
         totalPrice: 4,
         purchasable: false,
         purchasing: false,
@@ -93,8 +87,8 @@ class BurgerBuilder extends Component {
 
         const queryParams = [];
 
-        for(let i in this.state.ingredients){
-            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
+        for(let i in this.props.ing){
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.props.ing[i]));
         }
         queryParams.push('price=' + this.state.totalPrice);
         const queryString = queryParams.join('&');
@@ -112,14 +106,14 @@ class BurgerBuilder extends Component {
     addIngredientHandler = (type) => {
         
         //get current state
-        const oldCount = this.state.ingredients[type];
+        const oldCount = this.props.ing[type];
         //updated count is old count plus 1
         const updatedCount = oldCount + 1;
 
         //state should be updated in an immmutable way so we will create a new object
         const updatedIngredients = {
             //get the current object
-            ...this.state.ingredients
+            ...this.props.ing
 
         };
 
@@ -147,7 +141,7 @@ class BurgerBuilder extends Component {
 
 
         //get current state
-        const oldCount = this.state.ingredients[type];
+        const oldCount = this.props.ing[type];
 
         //check if count is less that zero if so do nothing.
         if(oldCount <= 0) {
@@ -161,7 +155,7 @@ class BurgerBuilder extends Component {
         //state should be updated in an immmutable way so we will create a new object
         const updatedIngredients = {
             //get the current object
-            ...this.state.ingredients
+            ...this.props.ing
         
         };
         
@@ -184,7 +178,7 @@ class BurgerBuilder extends Component {
     render() {
             const disableInfo = {
                 //copying object in an immutable way.
-                ...this.state.ingredients
+                ...this.props.ing
             };
 
             //checking the keys in ingredients state object eg then values.
@@ -197,15 +191,15 @@ class BurgerBuilder extends Component {
             let burger =  this.state.error ? <p>Ingredients cant be loaded.</p> : <Spinner />;
 
             //use conditional statement to check if we have recieved data from server or else display spinner.
-            if(this.state.ingredients) {
+            if(this.props.ing) {
     
             burger = 
             (
             <Aux>
-            <Burger ingredients={this.state.ingredients} />
+            <Burger ingredients={this.props.ing} />
             <BuildControls 
-             ingredientAdded={this.addIngredientHandler}
-             ingredientDeducted={this.removeIngredientHandler}
+             ingredientAdded={this.props.onIngredientAdded}
+             ingredientDeducted={this.props.onIngredientRemoved}
              disabled={disableInfo}
              purchasable={this.state.purchasable}
              price={this.state.totalPrice}
@@ -214,7 +208,7 @@ class BurgerBuilder extends Component {
             </Aux>            
             );
 
-            orderSummary =  <OrderSummary totalPrice={this.state.totalPrice} continue={this.purchaseContinueHandler} cancel={this.purchaseCancelHandler} ingredients={this.state.ingredients} />
+            orderSummary =  <OrderSummary totalPrice={this.state.totalPrice} continue={this.purchaseContinueHandler} cancel={this.purchaseCancelHandler} ingredients={this.props.ing} />
 
         }
 
