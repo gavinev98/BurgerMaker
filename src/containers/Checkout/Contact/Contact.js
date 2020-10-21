@@ -11,6 +11,8 @@ import  Spinner from '../../../components/UI/Modal/Spinner/Spinner';
 import Input from '../../../components/UI/Input/Input';
 import input from '../../../components/UI/Input/Input';
 
+import { connect } from 'react-redux';
+
 
 class Contact extends Component {
 
@@ -99,7 +101,7 @@ class Contact extends Component {
 
 
                 const order = {
-                    ingredients : this.props.ingredients,
+                    ingredients : this.props.ings,
                     price: this.props.price,
                     orderData: formData
 
@@ -219,5 +221,16 @@ class Contact extends Component {
     }
 }
 
+const mapStateToProps = state => {
+    
+    return {
+        ings: state.ingredients,
+        price: state.totalPrice
+    }
 
-export default Contact;
+}
+
+
+//we are not dispatching any actions 
+
+export default connect(mapStateToProps)(Contact);
