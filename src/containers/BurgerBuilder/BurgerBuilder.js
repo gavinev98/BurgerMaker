@@ -27,7 +27,6 @@ import * as actionTypes from '../../store/actions';
 class BurgerBuilder extends Component {
     //adding state to our burger builder class
     state = {
-        totalPrice: 4,
         purchasable: false,
         purchasing: false,
         loading: false,
@@ -90,7 +89,7 @@ class BurgerBuilder extends Component {
         for(let i in this.props.ing){
             queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.props.ing[i]));
         }
-        queryParams.push('price=' + this.state.totalPrice);
+        queryParams.push('price=' + this.props.totalPrice);
         const queryString = queryParams.join('&');
 
         this.props.history.push({
@@ -100,7 +99,7 @@ class BurgerBuilder extends Component {
         );
 
     }
-    
+
     render() {
             const disableInfo = {
                 //copying object in an immutable way.
@@ -128,13 +127,13 @@ class BurgerBuilder extends Component {
              ingredientDeducted={this.props.onIngredientRemoved}
              disabled={disableInfo}
              purchasable={this.state.purchasable}
-             price={this.state.totalPrice}
+             price={this.props.totalPrice}
              ordered={this.purchaseHandler}
             />
             </Aux>            
             );
 
-            orderSummary =  <OrderSummary totalPrice={this.state.totalPrice} continue={this.purchaseContinueHandler} cancel={this.purchaseCancelHandler} ingredients={this.props.ing} />
+            orderSummary =  <OrderSummary totalPrice={this.props.totalPrice} continue={this.purchaseContinueHandler} cancel={this.purchaseCancelHandler} ingredients={this.props.ing} />
 
         }
 
@@ -164,7 +163,8 @@ class BurgerBuilder extends Component {
 const mapStateToProps = state => {
     return {
 
-        ing: state.ingredients
+        ing: state.ingredients,
+        price: state.totalPrice
 
     };
 }
