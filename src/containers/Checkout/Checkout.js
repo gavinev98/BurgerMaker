@@ -6,13 +6,10 @@ import { Route } from 'react-router-dom';
 
 import Contact from '../Checkout/Contact/Contact'
 
+import connect from 'react-redux';
+
 class Checkout extends Component {
 
-
-    state = {
-        ingredients: null,
-        price: 0
-    }
 
     checkoutCancelledHander = () => {
         this.props.history.goBack();
@@ -22,6 +19,8 @@ class Checkout extends Component {
         this.props.history.replace('/checkout/contact-data');
     }
 
+
+    /*
     componentWillMount () {
         //extracting query params
         const query = new URLSearchParams(this.props.location.search);
@@ -40,6 +39,7 @@ class Checkout extends Component {
         }
         this.setState({ingredients : ingredients, price : price});
     }
+    */
 
 
     //goal is to create a checkout summary show burger,
@@ -61,4 +61,18 @@ class Checkout extends Component {
 
 }
 
-export default Checkout;
+
+const mapStateToProps = state => {
+    
+    return {
+        ings: state.ingredients,
+        price: state.totalPrice
+    }
+
+}
+
+//we dont dispatch as we are not dispatching.
+
+
+
+export default connect(mapStateToProps)(Checkout);
