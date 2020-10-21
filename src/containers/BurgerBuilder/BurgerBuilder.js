@@ -27,7 +27,6 @@ import * as actionTypes from '../../store/actions';
 class BurgerBuilder extends Component {
     //adding state to our burger builder class
     state = {
-        purchasable: false,
         purchasing: false,
         loading: false,
         error: null
@@ -47,6 +46,7 @@ class BurgerBuilder extends Component {
       //      });
  //   }
 
+
     updatePurchaseStatus (ingredients) {
         //for the purchase button to be active there needs to be ingredients.
         //firstly we will copy the ingredients into a new object in an immutable way.
@@ -57,6 +57,7 @@ class BurgerBuilder extends Component {
         //to create array of string enteries. eg salad bacon cheese. and then we map this array to recieve key values ie the quantities.
         //map method recieves the key.
         //using reduce key to flatten to single number.
+        
         const sum = Object.keys(ingredients)
         .map(igKey => {
             return ingredients[igKey];
@@ -64,12 +65,13 @@ class BurgerBuilder extends Component {
         .reduce((sum, el) => {
             return sum + el;
         }, 0);
-
+        return sum > 0;
         //setting sum to true or false based on fact if sum is greater than 0.
-        this.setState({purchasable: sum > 0})
+        //this.setState({purchasable: sum > 0})
         
     }
-
+    
+    
     //handler to differentiate if the order now button was clicked.
     //arrow functions are used for maintaining state.
     purchaseHandler = () => {
@@ -126,7 +128,7 @@ class BurgerBuilder extends Component {
              ingredientAdded={this.props.onIngredientAdded}
              ingredientDeducted={this.props.onIngredientRemoved}
              disabled={disableInfo}
-             purchasable={this.state.purchasable}
+             purchasable={this.updatePurchaseStatus(this.props.ing)}
              price={this.props.price}
              ordered={this.purchaseHandler}
             />
