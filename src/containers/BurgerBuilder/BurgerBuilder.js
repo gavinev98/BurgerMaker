@@ -89,7 +89,7 @@ class BurgerBuilder extends Component {
         for(let i in this.props.ing){
             queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.props.ing[i]));
         }
-        queryParams.push('price=' + this.props.totalPrice);
+        queryParams.push('price=' + this.props.price);
         const queryString = queryParams.join('&');
 
         this.props.history.push({
@@ -127,13 +127,13 @@ class BurgerBuilder extends Component {
              ingredientDeducted={this.props.onIngredientRemoved}
              disabled={disableInfo}
              purchasable={this.state.purchasable}
-             price={this.props.totalPrice}
+             price={this.props.price}
              ordered={this.purchaseHandler}
             />
             </Aux>            
             );
 
-            orderSummary =  <OrderSummary totalPrice={this.props.totalPrice} continue={this.purchaseContinueHandler} cancel={this.purchaseCancelHandler} ingredients={this.props.ing} />
+            orderSummary =  <OrderSummary totalPrice={this.props.price} continue={this.purchaseContinueHandler} cancel={this.purchaseCancelHandler} ingredients={this.props.ing} />
 
         }
 
