@@ -6,7 +6,7 @@ import { Route } from 'react-router-dom';
 
 import Contact from '../Checkout/Contact/Contact'
 
-import connect from 'react-redux';
+import { connect } from 'react-redux';
 
 class Checkout extends Component {
 
