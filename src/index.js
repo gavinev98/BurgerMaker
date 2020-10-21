@@ -14,7 +14,7 @@ import reducer from './store/reducer';
 
 
 
-const store = createStore();
+const store = createStore(reducer);
 
 const app = (
 
