@@ -19,7 +19,7 @@ import Spinner from '../../components/UI/Modal/Spinner/Spinner';
 
 import withErrorHandler from '../../withErrorHandler/withErrorHandler';
 
-import * as actionTypes from '../../store/actions';
+import * as actionTypes from '../../store/actions/actions';
 
 
 
