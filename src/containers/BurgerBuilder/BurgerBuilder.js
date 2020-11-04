@@ -19,7 +19,7 @@ import Spinner from '../../components/UI/Modal/Spinner/Spinner';
 
 import withErrorHandler from '../../withErrorHandler/withErrorHandler';
 
-import * as actionTypes from '../../store/actions/actions';
+import * as burgerBuilderActions from '../../store/actions/index';
 
 
 
@@ -179,8 +179,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         //creating two methods
-        onIngredientAdded: (ingName) => dispatch({type: actionTypes.ADD_INGREDIENT, ingredientName : ingName }),
-        onIngredientRemoved: (ingName) => dispatch({type: actionTypes.REMOVE_INGREDIENT, ingredientName : ingName })
+        onIngredientAdded: (ingName) => dispatch(burgerBuilderActions.addIngredient(ingName)),
+        onIngredientRemoved: (ingName) => dispatch(burgerBuilderActions.removeIngredient(ingName))
 
     }
 }
