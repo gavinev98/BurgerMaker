@@ -20,6 +20,7 @@ import Spinner from '../../components/UI/Modal/Spinner/Spinner';
 import withErrorHandler from '../../withErrorHandler/withErrorHandler';
 
 import * as burgerBuilderActions from '../../store/actions/index';
+import { fetchIngredientsFailed, initIngredients } from "../../store/actions/burgerBuilder";
 
 
 
@@ -34,6 +35,8 @@ class BurgerBuilder extends Component {
 
     //method for fetching data componentdidmount
    componentDidMount () {
+        //fetching ingredients via the redux store.
+        this.props.fetchIngredients();
 
     }
 
@@ -109,7 +112,7 @@ class BurgerBuilder extends Component {
 
             let orderSummary = null;
 
-            let burger =  this.state.error ? <p>Ingredients cant be loaded.</p> : <Spinner />;
+            let burger =  this.props.error ? <p>Ingredients cant be loaded.</p> : <Spinner />;
 
             //use conditional statement to check if we have recieved data from server or else display spinner.
             if(this.props.ing) {
@@ -160,7 +163,8 @@ const mapStateToProps = state => {
     return {
 
         ing: state.ingredients,
-        price: state.totalPrice
+        price: state.totalPrice,
+        error: state.error
 
     };
 }
@@ -171,8 +175,9 @@ const mapDispatchToProps = dispatch => {
     return {
         //creating two methods
         onIngredientAdded: (ingName) => dispatch(burgerBuilderActions.addIngredient(ingName)),
-        onIngredientRemoved: (ingName) => dispatch(burgerBuilderActions.removeIngredient(ingName))
-
+        onIngredientRemoved: (ingName) => dispatch(burgerBuilderActions.removeIngredient(ingName)),
+        fetchIngredients: () => dispatch(burgerBuilderActions.initIngredients())
+        
     }
 }
 
