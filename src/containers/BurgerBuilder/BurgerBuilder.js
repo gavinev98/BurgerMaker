@@ -33,18 +33,9 @@ class BurgerBuilder extends Component {
     };
 
     //method for fetching data componentdidmount
-  //  componentDidMount () {
-     //   axios.get('https://react-my-burger-70850.firebaseio.com/ingredients.json')
-   //         .then(response => {
+   componentDidMount () {
 
-                //recieve the ingredients in the response handle null valeus also
-      //           this.setState({ingredients : response.data});
-        
-      //      })
-     //       .catch(error => {
-           //     this.setState({error: true})
-      //      });
- //   }
+    }
 
 
     updatePurchaseStatus (ingredients) {
