@@ -30,7 +30,7 @@ class BurgerBuilder extends Component {
     state = {
         purchasing: false,
         loading: false,
-        error: null
+
     };
 
     //method for fetching data componentdidmount
