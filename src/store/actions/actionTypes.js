@@ -5,3 +5,7 @@ export const SET_INGREDIENTS = 'SET_INGREDIENTS';
 export const FETCH_INGREDIENTS_FAILED = 'FETCH_INGREDIENTS_FAILED';
 
 
+//setting up action types for successful burger purchase and failure of burger purchase.
+export const PURCHASE_BURGER_SUCCESS = 'PURCHASE_BURGER_SUCCESS';
+export const PURCHASE_BURGER_FAIL = 'PURCHASE_BURGER_FAIL';
+
