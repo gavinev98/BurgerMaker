@@ -13,6 +13,10 @@ import input from '../../../components/UI/Input/Input';
 
 import { connect } from 'react-redux';
 
+import withErrorHandler from '../../../withErrorHandler/withErrorHandler';
+
+import * as action from '../../../store/actions/index';
+
 
 class Contact extends Component {
 
@@ -89,8 +93,6 @@ class Contact extends Component {
 
     orderHander = (event) => {
             event.preventDefault();        
-        //positing to the firebase. creating object to store our data.
-                this.setState({loading : true});
 
                 //retrieving the data from the order form.
                 const formData = {};
@@ -106,21 +108,9 @@ class Contact extends Component {
                     orderData: formData
 
                 }
-                axios.post('/orders.json', order)
-                .then(response => {
-                   //closed the spinner
-                   this.setState({loading: false});
-                   //alert message
-                   alert("Thank you, your order was sucessful");
-                   this.props.history.push('/');
-          
-        
-                })
-                .catch(error => {
-                 alert("Your order was not successful please try again");
-                 //hide spinner and modal
-                 this.setState({loading : false});
-                })
+                //passing the order data to our dispatch function.
+                this.props.purchaseBurgerStart(order);
+  
 
     }
 
@@ -231,6 +221,10 @@ const mapStateToProps = state => {
 }
 
 
+const mapDispatchToProps = dispatch => {
+    onOrderBurger: (orderData) => dispatch(action.purchaseBurgerStart(orderData))
+}
+
 //we are not dispatching any actions 
 
-export default connect(mapStateToProps)(Contact);
+export default connect(mapStateToProps)(withErrorHandler(Contact, axios));
