@@ -32,7 +32,7 @@ export const purchaseBurgerStart = (orderData) => {
           dispatch(purchaseBurgerSuccess(response.data, orderData))
         })
         .catch(error => {
-        
+            dispatch(purchaseBurgerFailure(error));
        
         })
     }
