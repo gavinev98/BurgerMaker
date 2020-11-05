@@ -13,4 +13,13 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
 
+        switch (action.type) {
+
+            case actionTypes.PURCHASE_BURGER_SUCCESS:
+                return {};
+            case actionTypes.PURCHASE_BURGER_FAIL:
+                return {};
+            default:
+                return state;
+        }
 }
