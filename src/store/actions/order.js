@@ -1,6 +1,10 @@
 //asynchrounous action creators eg dealing with the database.
 import * as actionTypes from './actionTypes';
+import axios from '../../axios-order';
 //creating action creators for purchasing/ordering a burger.
+
+
+//this is a synchronous action creator
 export const purchaseBurgerSuccess = (id, orderData) =>  {
     return {
         type: actionTypes.PURCHASE_BURGER_SUCCESS,
@@ -9,9 +13,27 @@ export const purchaseBurgerSuccess = (id, orderData) =>  {
     }
 }
 
+//this is a synchronous action creator
 export const purchaseBurgerFailure = (error) => {
     return {
-        type: actionTypes.purchaseBurgerFailure,
+        type: actionTypes.PURCHASE_BURGER_FAIL,
         error: error
+    }
+}
+
+//this is an asynchronous action creator. This will run when we click order.
+export const purchaseBurgerStart = (orderData) => {
+    return  dispatch => {
+        //we want to post a new order to firebase.
+        axios.post('/orders.json', orderData)
+        .then(response => {
+          //if we were sucessful then we want to dispatch our synchronous action creator ie purchaseBurgerSuccess.
+          console.log(response.data);
+          dispatch(purchaseBurgerSuccess(response.data, orderData))
+        })
+        .catch(error => {
+        
+       
+        })
     }
 }
