@@ -1,4 +1,4 @@
 //this file will be used as a central store for all action creators.
 
 export { addIngredient, removeIngredient, initIngredients} from './burgerBuilder';
-export {purchaseBurgerStart} from './order';
+export {purchaseBurger} from './order';

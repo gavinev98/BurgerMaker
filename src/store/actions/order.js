@@ -21,9 +21,19 @@ export const purchaseBurgerFailure = (error) => {
     }
 }
 
+export const purchaseBurgerStart = () => {
+
+        return {
+            type: actionTypes.purchaseBurgerStart
+        }
+
+}
+
 //this is an asynchronous action creator. This will run when we click order.
-export const purchaseBurgerStart = (orderData) => {
+export const purchaseBurger = (orderData) => {
     return  dispatch => {
+        //dispatching this method before reaching out to firebase.
+        dispatch(purchaseBurgerStart());
         //we want to post a new order to firebase.
         axios.post('/orders.json', orderData)
         .then(response => {
@@ -36,4 +46,4 @@ export const purchaseBurgerStart = (orderData) => {
        
         })
     }
-}
+};
