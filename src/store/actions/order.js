@@ -39,7 +39,7 @@ export const purchaseBurger = (orderData) => {
         .then(response => {
           //if we were sucessful then we want to dispatch our synchronous action creator ie purchaseBurgerSuccess.
           console.log(response.data);
-          dispatch(purchaseBurgerSuccess(response.data, orderData))
+          dispatch(purchaseBurgerSuccess(response.data.name, orderData))
         })
         .catch(error => {
             dispatch(purchaseBurgerFailure(error));

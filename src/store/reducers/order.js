@@ -19,7 +19,7 @@ const reducer = (state = initialState, action) => {
                 //create javascript object for each order. merging together.
                 const newOrder = {
                     ...action.orderData,
-                    id: action.id
+                    id: action.orderID
                 }
                 return {
                     ...state,

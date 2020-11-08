@@ -82,7 +82,7 @@ class Contact extends Component {
                     options : [{value: 'fastest', displayValue : 'Fastest'},
                                 {value: 'cheapest', displayValue : 'Cheapest'} ]
                 },
-                value: '',
+                value: 'fastest',
                 validation : {},
                 valid:true
             },
@@ -109,7 +109,7 @@ class Contact extends Component {
 
                 }
                 //passing the order data to our dispatch function.
-                this.props.purchaseBurgerStart(order);
+                this.props.onOrderBurger(order);
   
 
     }
