@@ -20,13 +20,13 @@ const reducer = (state = initialState, action) => {
                 //create javascript object for each order. merging together.
                 const newOrder = {
                     ...action.orderData,
-                    id: action.orderID,
-                    redirect: true
+                    id: action.orderID
                 }
                 return {
                     ...state,
                     loading: false,
-                    orders: state.orders.concat(newOrder)
+                    orders: state.orders.concat(newOrder),
+                    redirect: true
 
                 };
             case actionTypes.PURCHASE_BURGER_FAIL:

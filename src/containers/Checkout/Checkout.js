@@ -12,14 +12,6 @@ import * as actions from '../../store/actions/index';
 
 class Checkout extends Component {
 
-    //once this component mounts ie loads we will dispatch the redirect action.
-    componentWillMount () {
-
-        //run dispatch method.
-        this.props.onInitPurchase();
-    }
-
-
     checkoutCancelledHander = () => {
         this.props.history.goBack();
     }
@@ -91,12 +83,7 @@ const mapStateToProps = state => {
 
 }
 
-//we dont dispatch as we are not dispatching.
-const mapDispatchToProps = dispatch => {
-    return {
-        onInitPurchase: () => dispatch(actions.purchaseInit())
-    };  
-}
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
+
+export default connect(mapStateToProps)(Checkout);
