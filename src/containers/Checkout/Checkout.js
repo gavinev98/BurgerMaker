@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 import Contact from '../Checkout/Contact/Contact'
 
@@ -44,18 +44,23 @@ class Checkout extends Component {
 
     //goal is to create a checkout summary show burger,
     render() {
-        return (
-            <div>
-                <CheckoutSummary 
-                checkoutCancelled={this.checkoutCancelledHander} 
-                checkoutContinued={this.checkoutContinuedHandler} 
-                ingredients={this.props.ings} />
-                
-                <Route path={this.props.match.path + '/contact-data'} 
-                component={Contact}/>
-            </div>
 
-        );
+        let summary = <Redirect to="/"/>
+        //check if ingredients are not equal to null.
+        if(this.props.ings) {
+         summary =  (<div>
+            <CheckoutSummary 
+            checkoutCancelled={this.checkoutCancelledHander} 
+            checkoutContinued={this.checkoutContinuedHandler} 
+            ingredients={this.props.ings} />
+
+            <Route path={this.props.match.path + '/contact-data'} 
+            component={Contact}/>
+            
+        </div>);
+        }
+        
+        return summary;
     }
 
 
