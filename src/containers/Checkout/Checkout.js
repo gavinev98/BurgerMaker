@@ -8,7 +8,16 @@ import Contact from '../Checkout/Contact/Contact'
 
 import { connect } from 'react-redux';
 
+import * as actions from '../../store/actions/index';
+
 class Checkout extends Component {
+
+    //once this component mounts ie loads we will dispatch the redirect action.
+    componentWillMount () {
+
+        //run dispatch method.
+        this.props.onInitPurchase();
+    }
 
 
     checkoutCancelledHander = () => {
@@ -47,8 +56,14 @@ class Checkout extends Component {
 
         let summary = <Redirect to="/"/>
         //check if ingredients are not equal to null.
+    
         if(this.props.ings) {
+
+        const purchaseRedirect = this.props.purchaseRedirect ? <Redirect /> : null;
+
+
          summary =  (<div>
+             {purchaseRedirect}
             <CheckoutSummary 
             checkoutCancelled={this.checkoutCancelledHander} 
             checkoutContinued={this.checkoutContinuedHandler} 
@@ -70,13 +85,18 @@ class Checkout extends Component {
 const mapStateToProps = state => {
     
     return {
-        ings: state.burgerBuilder.ingredients
+        ings: state.burgerBuilder.ingredients,
+        purchaseRedirect: state.orders.redirect
     }
 
 }
 
 //we dont dispatch as we are not dispatching.
-
+const mapDispatchToProps = dispatch => {
+    return {
+        onInitPurchase: () => dispatch(actions.purchaseInit())
+    };  
+}
 
 
 export default connect(mapStateToProps)(Checkout);

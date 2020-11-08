@@ -5,7 +5,8 @@ import * as actionTypes from '../actions/actionTypes';
 const initialState = {
 
     orders: [],
-    loading: false
+    loading: false,
+    redirect:false
 
 }
 
@@ -19,7 +20,8 @@ const reducer = (state = initialState, action) => {
                 //create javascript object for each order. merging together.
                 const newOrder = {
                     ...action.orderData,
-                    id: action.orderID
+                    id: action.orderID,
+                    redirect: true
                 }
                 return {
                     ...state,
@@ -38,6 +40,11 @@ const reducer = (state = initialState, action) => {
                    ...state,
                    loading:true	
                 };
+            case actionTypes.PURCHASE_BURGER_INIT:
+                return {
+                    ...state,
+                    redirect: false
+                }
             default:
                 return state;
         }

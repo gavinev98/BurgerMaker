@@ -47,3 +47,10 @@ export const purchaseBurger = (orderData) => {
         })
     }
 };
+
+//the final action creator will be used to redirect to the homepage
+export const purchaseInit = () => {
+    return {
+        type : actionTypes.PURCHASE_BURGER_INIT
+    }
+}
