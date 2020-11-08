@@ -12,3 +12,7 @@ export const PURCHASE_BURGER_FAIL = 'PURCHASE_BURGER_FAIL';
 //setting up action type for loading when fetching ingredients.
 export const PURCHASE_BURGER_START = 'PURCHASE_BURGER_START';
 
+
+//adding a redirect action type once the order has suceesfully gone through.
+export const PURCHASE_BURGER_INIT = 'PURCHASE_BURGER_INIT';
+
