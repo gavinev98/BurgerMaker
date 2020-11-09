@@ -6,36 +6,18 @@ import axios from '../../axios-order';
 
 import withErrorHandler from '../../withErrorHandler/withErrorHandler';
 
+import * as actionC from '../../store/actions/index';
+
 
 class Orders extends Component {
 
 
-    state = {
-            orders : [],
-            loading: true
-
-    }
 
     //we only want to mount it once ie when clicked so we use DidMount().
     componentDidMount() {
-        //using axios to retrieve our data.
-        axios.get('/orders.json')
-        .then(response => {
 
-            const fetchedOrders = [];
-            for(let key in response.data) {
-                fetchedOrders.push({
-                    ...response.data[key],
-                    id: key
-                });
-            }
-            this.setState({loading : false, orders : fetchedOrders});
-
-            console.log(fetchedOrders);
-        }).catch(err => {
-            this.setState({loading : false});
-        })
-
+        //calll to asynchronous code action creator
+        this.props.onFetchOrders();
     }
 
 
@@ -55,4 +37,24 @@ class Orders extends Component {
     }
 }
 
-export default withErrorHandler(Orders, axios);
+//setting up the connection to the redux stores.
+const mapStateToProps = state => {
+    return {
+
+        ing: state.burgerBuilder.ingredients,
+        price: state.burgerBuilder.totalPrice,
+        error: state.burgerBuilder.error,
+
+    };
+}
+
+
+
+const mapDispatchToProps = dispatch => {
+    return {
+        //dispatch asynch action cretor
+        onFetchOrders: () => dispatch(actionC.fetchOrders())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(Orders, axios));
