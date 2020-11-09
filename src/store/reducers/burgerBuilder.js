@@ -1,5 +1,7 @@
 import * as actionTypes from '../actions/actionTypes';
 
+import { updateObject } from '../utility';
+
 const initialState = {
 
         ingredients: null,
@@ -30,6 +32,11 @@ const reducer = (state = initialState, action) => {
             };
 
         case actionTypes.REMOVE_INGREDIENT:
+            //storing updated properties in javascript object.
+            const updatedIngredient = {  [action.ingredientName]: state.ingredients[action.ingredientName] - 1};
+            //passing old state plus the updated properties using utility function.
+            const updatedIngredients = updateObject(state.ingredients, updatedIngredient );
+
             return {
                 ...state,
                 ingredients: {
