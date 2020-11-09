@@ -22,26 +22,30 @@ const reducer = (state = initialState, action) => {
     switch (action.type) {
 
         case actionTypes.ADD_INGREDIENT:
-            return {
-                ...state,
-                ingredients: {
-                    ...state.ingredients,
-                    [action.ingredientName]: state.ingredients[action.ingredientName] + 1
-                },
-                totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
-            };
+       //storing updated properties in javascript object.
+       const updatedIngredient = {  [action.ingredientName]: state.ingredients[action.ingredientName] + 1};
+       //passing old state plus the updated properties using utility function.
+       const updatedIngredients = updateObject(state.ingredients, updatedIngredient );
+       //store the updated state of all inside a new object.
+       const updatedState = {
+           ingredients: updatedIngredients,
+           totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
+       }
+       //return the updated object by passing old object plus new state.
+       return updateObject(state, updatedState);
 
         case actionTypes.REMOVE_INGREDIENT:
             //storing updated properties in javascript object.
-            const updatedIngredient = {  [action.ingredientName]: state.ingredients[action.ingredientName] - 1};
+            const updatedIng = {  [action.ingredientName]: state.ingredients[action.ingredientName] - 1};
             //passing old state plus the updated properties using utility function.
-            const updatedIngredients = updateObject(state.ingredients, updatedIngredient );
-
-            const updatedState = {
-                ingredients: updatedIngredients,
+            const updatedIngs = updateObject(state.ingredients, updatedIng );
+            //store the updated state of all inside a new object.
+            const updatedSt = {
+                ingredients: updatedIngs,
                 totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
             }
-            return updateObject(state, updatedState);
+            //return the updated object by passing old object plus new state.
+            return updateObject(state, updatedSt);
 
         case actionTypes.SET_INGREDIENTS:
             return {
