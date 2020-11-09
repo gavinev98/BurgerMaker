@@ -80,6 +80,8 @@ export const fetchOrderStart = () => {
 export const fetchOrders = () => {
         //using axios to retrieve our data.
     return dispatch => {
+        //dispatch loading symbol before displaying the data
+        dispatch(fetchOrderStart())
         axios.get('/orders.json')
             .then(response => {
             const fetchedOrders = [];
@@ -94,7 +96,7 @@ export const fetchOrders = () => {
              
             }).catch(err => {
         //dispatch our synchronous action creator for failed fetching
-        dispatch(fetchOrdersFail(error));
+        dispatch(fetchOrdersFail(err));
             })
         }
 }

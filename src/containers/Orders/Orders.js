@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { connect } from 'react-redux';
+
 import Order from '../../components/Order/Order';
 
 import axios from '../../axios-order';
@@ -8,9 +10,12 @@ import withErrorHandler from '../../withErrorHandler/withErrorHandler';
 
 import * as actionC from '../../store/actions/index';
 
+import Spinner from '../../components/UI/Modal/Spinner/Spinner';
+
+
+
 
 class Orders extends Component {
-
 
 
     //we only want to mount it once ie when clicked so we use DidMount().
@@ -23,15 +28,21 @@ class Orders extends Component {
 
     render() {
 
+        let orders = <Spinner />;
+
+        if(!this.props.loading){
+         orders =  (this.props.orders.map(order => (
+                <Order 
+                key={order.id}
+                ingredients={order.ingredients}
+                price={Number.parseFloat(order.price).toFixed(2)}
+                />
+            )))
+        }
+
         return(
             <div>
-                {this.state.orders.map(order => (
-                    <Order 
-                    key={order.id}
-                    ingredients={order.ingredients}
-                    price={Number.parseFloat(order.price).toFixed(2)}
-                    />
-                ))}
+                {orders}
             </div>
         );
     }
@@ -41,9 +52,8 @@ class Orders extends Component {
 const mapStateToProps = state => {
     return {
 
-        ing: state.burgerBuilder.ingredients,
-        price: state.burgerBuilder.totalPrice,
-        error: state.burgerBuilder.error,
+        orders: state.orders.orders,
+        loading: state.orders.loading
 
     };
 }
