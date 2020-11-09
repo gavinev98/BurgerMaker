@@ -16,3 +16,8 @@ export const PURCHASE_BURGER_START = 'PURCHASE_BURGER_START';
 //adding a redirect action type once the order has suceesfully gone through.
 export const PURCHASE_BURGER_INIT = 'PURCHASE_BURGER_INIT';
 
+
+//setting up an action type for fetching orders to display on orders page
+export const FETCH_ORDERS_START = 'FETCH_ORDERS_START';
+export const FETCH_ORDERS_SUCCESS = 'FETCH_ORDERS_SUCCESS';
+export const FETCH_ORDERS_FAIL = 'FETCH_ORDERS_FAIL';
