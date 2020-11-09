@@ -93,7 +93,9 @@ export const fetchOrders = () => {
          dispatch(fetchOrdersSucess(fetchedOrders));
              
             }).catch(err => {
-                this.setState({loading : false});
+        //dispatch our synchronous action creator for failed fetching
+        dispatch(fetchOrdersFail(error));
+        
             })
         }
 
