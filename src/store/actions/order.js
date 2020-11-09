@@ -95,8 +95,6 @@ export const fetchOrders = () => {
             }).catch(err => {
         //dispatch our synchronous action creator for failed fetching
         dispatch(fetchOrdersFail(error));
-        
             })
         }
-
 }
