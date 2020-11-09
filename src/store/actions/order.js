@@ -54,3 +54,24 @@ export const purchaseInit = () => {
         type : actionTypes.PURCHASE_BURGER_INIT
     }
 }
+
+export const fetchOrdersSucess = (orders) => {
+    return {
+        type: actionTypes.FETCH_ORDERS_SUCCESS,
+        orders: orders
+    }
+}
+
+export const fetchOrdersFail = (error) => {
+    return {
+        type: actionTypes.FETCH_ORDERS_FAIL,
+        error: error
+    }
+}
+
+
+export const fetchOrderStart = () => {
+    return {
+        type: actionTypes.FETCH_ORDERS_START
+    }
+}
