@@ -75,3 +75,26 @@ export const fetchOrderStart = () => {
         type: actionTypes.FETCH_ORDERS_START
     }
 }
+
+//asynch action creator to fetch order via axios
+export const fetchOrders = () => {
+        //using axios to retrieve our data.
+    return dispatch => {
+        axios.get('/orders.json')
+            .then(response => {
+            const fetchedOrders = [];
+            for(let key in response.data) {
+                    fetchedOrders.push({
+                        ...response.data[key],
+                        id: key
+                    });
+                }
+         //dispatch our synchronous action creator with fetched orders.
+         dispatch(fetchOrdersSucess(fetchedOrders));
+             
+            }).catch(err => {
+                this.setState({loading : false});
+            })
+        }
+
+}
