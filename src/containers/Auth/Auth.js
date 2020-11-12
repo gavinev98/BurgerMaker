@@ -64,7 +64,7 @@ class Auth extends Component {
     }
 
     inputChangedHandler = (event, controlName) => {
-
+        // getting current state acquiring control named passed and updating props.
         const updatedControls = {
             ...this.state.controls,
             [controlName]: {
@@ -73,9 +73,10 @@ class Auth extends Component {
                 valid: this.checkValidity(event.target.value, this.state.controls[controlName].validation),
                 touched: true
             }
-        }
+        };
 
-
+        //updating the controls via setState.
+        this.setState({controls: updatedControls});
 
 
     }
