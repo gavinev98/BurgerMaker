@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 
+import classes from './Auth.css';
+
 
 
 
@@ -43,6 +45,24 @@ class Auth extends Component {
         }
     }
 
+    checkValidity(value, rules) {
+        let isValid = true;
+
+        if(rules.required) {
+            isValid = value.trim() !== '' && isValid;
+        }
+
+        if(rules.minLength) {
+            isValid = value.length >= rules.minLength && isValid;
+        }
+
+        if(rules.maxLength) {
+            isValid = value.length <= rules.minLength && isValid;
+        }
+
+        return isValid;
+    }
+
     render() {
           //converting our controls form js object to array.
           const formElementsArray = [];
@@ -71,7 +91,7 @@ class Auth extends Component {
           
 
         return (
-            <div>
+            <div className={classes.Auth}>
                 <form>
                  {form}
                 <Button btnType="Success" disabled={!this.state.formIsValid}>Sign In</Button>
