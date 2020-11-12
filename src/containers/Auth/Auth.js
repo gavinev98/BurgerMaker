@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 
 import classes from './Auth.css';
 
+import * as actions from '../../store/actions/index';
 
 class Auth extends Component {
 
@@ -116,8 +118,19 @@ class Auth extends Component {
 
         );
     }
+}
 
+
+//
+const mapDispatchToProps = dipsatch => {
+
+    return {
+
+        onAuth: (email, pasword) => dispatchEvent(actions.auth(email, password))
+
+
+    }
 
 }
 
-export default Auth;
+export default connect(null,mapDispatchToProps)(Auth);
