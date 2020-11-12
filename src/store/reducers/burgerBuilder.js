@@ -48,8 +48,9 @@ const reducer = (state = initialState, action) => {
             return updateObject(state, updatedSt);
 
         case actionTypes.SET_INGREDIENTS:
-            return {
-                ...state,
+          //using update object for setting state.
+          return updateObject(state, {
+                
                 ingredients: {
                     salad: action.ingredients.salad,
                     bacon: action.ingredients.bacon,
@@ -58,13 +59,13 @@ const reducer = (state = initialState, action) => {
                 },
                 totalPrice: 4,
                 error: false
-            }
+            } );
         
         case actionTypes.FETCH_INGREDIENTS_FAILED:
-            return {
-                ...state,
+            return updateObject(state, {
+                
                 error: true
-            }
+            } );
         default:
             return state;
     }
