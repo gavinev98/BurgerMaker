@@ -6,9 +6,6 @@ import Button from '../../components/UI/Button/Button';
 import classes from './Auth.css';
 
 
-
-
-
 class Auth extends Component {
 
     //this wont be handled in redux as we only care about local state.
