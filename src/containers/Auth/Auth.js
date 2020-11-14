@@ -84,14 +84,12 @@ class Auth extends Component {
 
 
     //using method to switch between sign in and sign up.
-    swithAuthModeHandler = () => {
-
+    switchAuthHandler = () => {
+        debugger
      this.setState(prevState => {
-        return {isSignup: !prevState.isSignUp}
-     }); 
-
-
-    }
+        return {isSignup: !prevState.isSignUp};
+     })
+  }
 
     submitHandler = (event) => {
         debugger;
@@ -135,7 +133,9 @@ class Auth extends Component {
                 <Button btnType="Success" >Sign Up</Button>
                 </form>
 
-                <Button btnType="Danger" >SWITCH TO SIGN IN</Button>
+                <Button
+                 clicked={this.switchAuthHandler}                 
+                 btnType="Danger" >SWITCH TO {this.state.isSignUp ? 'SIGN IN' : 'SIGN UP'}</Button>
             </div>
 
 
