@@ -41,7 +41,9 @@ class Auth extends Component {
                 valid: false,
                 touched: false
             }
-        }
+        },
+        isSignUp: true,
+        
     }
 
     checkValidity(value, rules) {
@@ -76,6 +78,17 @@ class Auth extends Component {
 
         //updating the controls via setState.
         this.setState({controls: updatedControls});
+
+
+    }
+
+
+    //using method to switch between sign in and sign up.
+    swithAuthModeHandler = () => {
+
+     this.setState(prevState => {
+        return {isSignup: !prevState.isSignUp}
+     }); 
 
 
     }
@@ -119,8 +132,10 @@ class Auth extends Component {
             <div className={classes.Auth}>
                 <form onSubmit={this.submitHandler}>
                  {form}
-                <Button btnType="Success" >Sign In</Button>
+                <Button btnType="Success" >Sign Up</Button>
                 </form>
+
+                <Button btnType="Danger" >SWITCH TO SIGN IN</Button>
             </div>
 
 
