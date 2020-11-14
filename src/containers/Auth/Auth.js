@@ -27,7 +27,7 @@ class Auth extends Component {
                 valid: false,
                 touched: false
             },
-            pasword: {
+            password: {
                 elementType: 'input',
                 elementConfig: {
                     type: 'password',
@@ -80,6 +80,14 @@ class Auth extends Component {
 
     }
 
+    submitHandler = (event) => {
+        debugger;
+        //prevent page reload.
+        console.log(event);
+        event.preventDefault();
+        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value);
+    }
+
     render() {
           //converting our controls form js object to array.
           const formElementsArray = [];
@@ -109,9 +117,9 @@ class Auth extends Component {
 
         return (
             <div className={classes.Auth}>
-                <form>
+                <form onSubmit={this.submitHandler}>
                  {form}
-                <Button btnType="Success" disabled={!this.state.formIsValid}>Sign In</Button>
+                <Button btnType="Success" >Sign In</Button>
                 </form>
             </div>
 
@@ -122,11 +130,11 @@ class Auth extends Component {
 
 
 //
-const mapDispatchToProps = dipsatch => {
+const mapDispatchToProps = dispatch => {
 
     return {
 
-        onAuth: (email, pasword) => dispatchEvent(actions.auth(email, password))
+        onAuth: (email, password) => dispatch(actions.auth(email, password))
 
 
     }

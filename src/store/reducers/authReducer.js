@@ -11,6 +11,12 @@ initialState = {
 
 const reducer = (state = initialState, action) => {
 
+    swtich(action.type) {
+
+
+
+    }
+
 
 }
 

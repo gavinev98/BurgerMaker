@@ -1,5 +1,7 @@
 
 import * as actionTypes from './actionTypes';
+//synchronous action creators for adding and removing items from burger.
+import axios from '../../axios-order';
 
 
 export const authStart = () => {
@@ -30,6 +32,8 @@ export const authFailure = (error) => {
 export const auth = (email, pasword) => {
     return dispatch => {
         dispatch(authStart());
+        //post data to axios.
+        axios.post()
 
         
 
