@@ -33,12 +33,13 @@ export const auth = (email, password) => {
     return dispatch => {
         dispatch(authStart());
         //post data to axios with api key, structure of data to be passed with request.
+       //store data in auth javascript object.
         const authData = {
             email : email,
             password: password,
             returnSecureToken: true
         }
-        axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AAAA6mq6p0c:APA91bEzAWEVl8yya3hwCZwEpqQHX6SiukAUi2yvOFYHVbigFjjVpkRHJvqnmfvgXRNUiy3nra3g7cUCSlLg976LM9Z7k8mHXOOSaM8mphKBUz08hdFn-Pyu7A9yDz8n88cfPjoWy1QQ', authData)
+        axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDURCHiHFax8SkAahbidFX6ai1EFfbIvWA', authData)
         .then(response => {
             console.log(response);
             dispatch(authSuccess(response.data));
