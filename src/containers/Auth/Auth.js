@@ -96,7 +96,7 @@ class Auth extends Component {
         //prevent page reload.
         console.log(event);
         event.preventDefault();
-        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value);
+        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignUp.value);
     }
 
     render() {
@@ -149,7 +149,7 @@ const mapDispatchToProps = dispatch => {
 
     return {
 
-        onAuth: (email, password) => dispatch(actions.auth(email, password))
+        onAuth: (email, password, method) => dispatch(actions.auth(email, password, method))
 
 
     }
