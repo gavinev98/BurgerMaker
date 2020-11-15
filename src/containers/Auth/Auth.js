@@ -42,7 +42,7 @@ class Auth extends Component {
                 touched: false
             }
         },
-        isSignUp: true,
+        isSignUp: true
         
     }
 
@@ -85,10 +85,10 @@ class Auth extends Component {
 
     //using method to switch between sign in and sign up.
     switchAuthHandler = () => {
-        debugger
-     this.setState(prevState => {
-        return {isSignup: !prevState.isSignUp};
-     })
+        debugger;
+        this.setState(prevState => ({
+            isSignUp: !prevState.isSignUp
+          }));
   }
 
     submitHandler = (event) => {
@@ -144,7 +144,7 @@ class Auth extends Component {
 }
 
 
-//
+//map dispatch to props to connect to redux container.
 const mapDispatchToProps = dispatch => {
 
     return {

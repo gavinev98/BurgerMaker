@@ -31,6 +31,11 @@ export const authFailure = (error) => {
 //asynch action creator which will be doing the auth stuff.
 export const auth = (email, password) => {
     return dispatch => {
+        //different links for endpoints to signing in and signing up.
+        let signIn = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDURCHiHFax8SkAahbidFX6ai1EFfbIvWA';
+        let signUp = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDURCHiHFax8SkAahbidFX6ai1EFfbIvWA';
+
+
         dispatch(authStart());
         //post data to axios with api key, structure of data to be passed with request.
        //store data in auth javascript object.
