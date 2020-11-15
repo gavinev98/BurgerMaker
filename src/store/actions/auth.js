@@ -29,13 +29,8 @@ export const authFailure = (error) => {
 };
 
 //asynch action creator which will be doing the auth stuff.
-export const auth = (email, password) => {
+export const auth = (email, password, isSignUp) => {
     return dispatch => {
-        //different links for endpoints to signing in and signing up.
-        let signIn = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDURCHiHFax8SkAahbidFX6ai1EFfbIvWA';
-        let signUp = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDURCHiHFax8SkAahbidFX6ai1EFfbIvWA';
-
-
         dispatch(authStart());
         //post data to axios with api key, structure of data to be passed with request.
        //store data in auth javascript object.
@@ -44,7 +39,13 @@ export const auth = (email, password) => {
             password: password,
             returnSecureToken: true
         }
-        axios.post('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDURCHiHFax8SkAahbidFX6ai1EFfbIvWA', authData)
+        //different links for endpoints to signing in and signing up.
+        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDURCHiHFax8SkAahbidFX6ai1EFfbIvWA';
+        if(!isSignUp){
+            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDURCHiHFax8SkAahbidFX6ai1EFfbIvWA';
+        }
+
+        axios.post(url, authData)
         .then(response => {
             console.log(response);
             dispatch(authSuccess(response.data));
