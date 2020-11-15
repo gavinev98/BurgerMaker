@@ -23,7 +23,7 @@ export const FETCH_ORDERS_SUCCESS = 'FETCH_ORDERS_SUCCESS';
 export const FETCH_ORDERS_FAIL = 'FETCH_ORDERS_FAIL';
 
 
-//authentication
+//authentication action types.
 export const AUTH_START = 'AUTH_START';
 export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 export const AUTH_FAIL = 'AUTH_FAIL';
