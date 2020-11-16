@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
 
     burgerBuilder: burgerBuilderReducer,
     orders: orderReducer,
-    authR: authReducer
+    auth: authReducer
 
 })
 
