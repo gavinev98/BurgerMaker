@@ -4,7 +4,7 @@ import { updateObject } from '../utility';
 import { auth } from '../actions';
 
 
-initialState = {
+const initialState = {
     token: null,
     userId: null,
     error: null,
@@ -36,7 +36,7 @@ const authFail = (state, action) => {
 
 
 
-const reducer = (state, action) => {
+const reducer = (state = initialState, action) => {
 
     switch ( action.type ) {
         case actionTypes.AUTH_START: return authStart(state, action);
@@ -51,4 +51,4 @@ const reducer = (state, action) => {
 
 
 
-export default authReducer;
+export default reducer;
