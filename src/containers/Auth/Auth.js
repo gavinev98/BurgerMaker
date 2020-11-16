@@ -8,6 +8,8 @@ import classes from './Auth.css';
 
 import * as actions from '../../store/actions/index';
 
+import Spinner from '../../components/UI/Modal/Spinner/Spinner';
+
 class Auth extends Component {
 
     //this wont be handled in redux as we only care about local state.
@@ -96,7 +98,7 @@ class Auth extends Component {
         //prevent page reload.
         console.log(event);
         event.preventDefault();
-        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignUp.value);
+        this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignUp);
     }
 
     render() {
@@ -111,7 +113,7 @@ class Auth extends Component {
           }
 
 
-          const form = formElementsArray.map(formElement => (
+          let form = formElementsArray.map(formElement => (
               <Input
               key={formElement.id} 
               elementType={formElement.config.elementType}
@@ -124,6 +126,10 @@ class Auth extends Component {
               changed={(event) => this.inputChangedHandler(event, formElement.id)} />
                ));
 
+
+         if(this.props.loading){
+             form = <Spinner />
+         }
           
 
         return (
@@ -144,6 +150,17 @@ class Auth extends Component {
 }
 
 
+//maping state to props to access loading state
+const mapStateToProps = state => {
+    return {
+        loading: state.auth.loading
+
+    }
+
+
+}
+
+
 //map dispatch to props to connect to redux container.
 const mapDispatchToProps = dispatch => {
 
@@ -156,4 +173,4 @@ const mapDispatchToProps = dispatch => {
 
 }
 
-export default connect(null,mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
