@@ -29,6 +29,22 @@ export const authFailure = (error) => {
     };
 };
 
+
+export const logout = () => {
+    return {
+
+    }
+}
+
+export const checkAuthTimeout = (expirationTime) => {
+    return dispatch => {
+        setTimeout(() => {
+            //logoutmethod
+
+        }, expirationTime);
+    }
+}
+
 //asynch action creator which will be doing the auth stuff.
 export const auth = (email, password, isSignUp) => {
     return dispatch => {
@@ -50,6 +66,8 @@ export const auth = (email, password, isSignUp) => {
         .then(response => {
             console.log(response);
             dispatch(authSuccess(response.data.idToken, response.data.localId));
+            //check auth expiration time.
+            dispatch(checkAuthTimeout(response.data.expiresIn));
         })
         .catch(err => {
             dispatch(authFailure(err.response.data.error))
