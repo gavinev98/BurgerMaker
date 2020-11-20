@@ -22,7 +22,7 @@ class Orders extends Component {
     componentDidMount() {
 
         //calll to asynchronous code action creator
-        this.props.onFetchOrders();
+        this.props.onFetchOrders(this.props.token);
     }
 
 
@@ -53,7 +53,8 @@ const mapStateToProps = state => {
     return {
 
         orders: state.orders.orders,
-        loading: state.orders.loading
+        loading: state.orders.loading,
+        token: state.auth.token
 
     };
 }
