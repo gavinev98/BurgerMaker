@@ -64,7 +64,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         //dispatch asynch action cretor
-        onFetchOrders: () => dispatch(actionC.fetchOrders())
+        onFetchOrders: (token) => dispatch(actionC.fetchOrders(token))
     }
 }
 
