@@ -30,12 +30,12 @@ export const purchaseBurgerStart = () => {
 }
 
 //this is an asynchronous action creator. This will run when we click order.
-export const purchaseBurger = (orderData) => {
+export const purchaseBurger = (orderData, token) => {
     return  dispatch => {
         //dispatching this method before reaching out to firebase.
         dispatch(purchaseBurgerStart());
         //we want to post a new order to firebase.
-        axios.post('/orders.json', orderData)
+        axios.post('/orders.json?auth='+ token, orderData)
         .then(response => {
           //if we were sucessful then we want to dispatch our synchronous action creator ie purchaseBurgerSuccess.
           console.log(response.data);
