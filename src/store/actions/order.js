@@ -77,12 +77,12 @@ export const fetchOrderStart = () => {
 }
 
 //asynch action creator to fetch order via axios
-export const fetchOrders = () => {
+export const fetchOrders = (token) => {
         //using axios to retrieve our data.
     return dispatch => {
         //dispatch loading symbol before displaying the data
         dispatch(fetchOrderStart())
-        axios.get('/orders.json')
+        axios.get('/orders.json?auth=' + token)
             .then(response => {
             const fetchedOrders = [];
             for(let key in response.data) {
