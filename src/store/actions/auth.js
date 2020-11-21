@@ -78,9 +78,10 @@ export const auth = (email, password, isSignUp) => {
 }
 
 //synchronous action creator for the auth redirect
-export const authRedirect = () => {
+export const setAuthRedirect = (path) => {
     return {
-        type: actionTypes.SET_AUTH_REDIRECT
+        type: actionTypes.SET_AUTH_REDIRECT,
+        path: path
     }
 }
 
