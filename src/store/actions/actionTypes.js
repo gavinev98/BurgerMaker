@@ -31,3 +31,4 @@ export const AUTH_FAIL = 'AUTH_FAIL';
 
 //auth for logging off the server.
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+export const SET_AUTH_REDIRECT = 'SET_AUTH_REDIRECT';
