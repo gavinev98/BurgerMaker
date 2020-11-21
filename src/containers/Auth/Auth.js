@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 
+import { Redirect } from 'react-router-dom';
+
 import classes from './Auth.css';
 
 import * as actions from '../../store/actions/index';
@@ -99,7 +101,7 @@ class Auth extends Component {
         console.log(event);
         event.preventDefault();
         this.props.onAuth(this.state.controls.email.value, this.state.controls.password.value, this.state.isSignUp);
-    }
+        }
 
     render() {
           //converting our controls form js object to array.
@@ -137,10 +139,17 @@ class Auth extends Component {
                  <p>{this.props.error.message}</p>
              )
          }
+
+         let authRedirect = null;
+         if(this.props.isAuthenticated) {
+            //render redirect
+            authRedirect = <Redirect to="/" />
+         }
           
 
         return (
             <div className={classes.Auth}>
+                {authRedirect}
                 {errorMessage}
                 <form onSubmit={this.submitHandler}>
                  {form}
@@ -162,7 +171,8 @@ class Auth extends Component {
 const mapStateToProps = state => {
     return {
         loading: state.auth.loading,
-        error: state.auth.error
+        error: state.auth.error,
+        isAuthenticated: state.auth.token !== null
 
     }
 
