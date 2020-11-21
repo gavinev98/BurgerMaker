@@ -120,6 +120,7 @@ class BurgerBuilder extends Component {
              purchasable={this.updatePurchaseStatus(this.props.ing)}
              price={this.props.price}
              ordered={this.purchaseHandler}
+             isAuth={this.props.isAuthenticated}
             />
             </Aux>            
             );
@@ -131,6 +132,8 @@ class BurgerBuilder extends Component {
         if(this.state.loading) {
             orderSummary = <Spinner />;
         }
+
+
 
 
             return(
@@ -157,6 +160,7 @@ const mapStateToProps = state => {
         ing: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
         error: state.burgerBuilder.error,
+        isAuthenticated: state.auth.token !== null
 
     };
 }
