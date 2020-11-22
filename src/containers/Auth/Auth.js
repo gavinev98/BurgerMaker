@@ -50,7 +50,7 @@ class Auth extends Component {
         
     }
 
-    componentDidMount () {
+    componentWillMount () {
 
         if(!this.props.building && this.props.authRedirect !== '/') {
             this.props.onSetAuthRedirectPath('/');
@@ -147,16 +147,16 @@ class Auth extends Component {
              )
          }
 
-         let authRedirect = null;
+         let authRedirection = null;
          if(this.props.isAuthenticated) {
             //render redirect
-            authRedirect = <Redirect to={this.props.authRedirectPath}/>
+            authRedirection = <Redirect to={this.props.authRedirect}/>
          }
           
 
         return (
             <div className={classes.Auth}>
-                {authRedirect}
+                {authRedirection}
                 {errorMessage}
                 <form onSubmit={this.submitHandler}>
                  {form}
