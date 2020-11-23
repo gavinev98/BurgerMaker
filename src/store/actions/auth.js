@@ -93,3 +93,18 @@ export const setAuthRedirect = (path) => {
     }
 }
 
+export const authCheckState = () => {
+    return dispatch => {
+        const token = localStorage.getItem('token');
+        if(!token){
+            dispatch(logout());
+        } else {
+            const expirationDate = new Date(localStorage.getItem('expirationDate'));
+            if(expirationDate > new Date){
+                dispatch(authSuccess(token, ));
+            } else {
+            dispatch(logout());
+            }
+        }
+    }
+}
