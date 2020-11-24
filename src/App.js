@@ -9,11 +9,19 @@ import Orders from './containers/Orders/Orders';
 import Auth from './containers/Auth/Auth';
 import Logout from './containers/Auth/Logout/Logout';
 
+import { connect } from 'react-redux';
+import * as actions from './store/actions/index';
+
 class App extends Component {
+
+
+  componentDidMount() {
+    //try run auto login method.
+    this.props.onTryAutoLogin();
+
+  }
+
   render() {
-
-
-
   return (
       <div>
         <Layout>
@@ -30,4 +38,14 @@ class App extends Component {
   }
 }
 
-export default App;
+
+//setting up redux mapDispatchToProps method.
+const mapDispatchToProps = dispatch => {
+    return {
+      onTryAutoLogin: () => dispatch(actions.authCheckState())
+    }
+
+
+}
+
+export default  connect(null, mapDispatchToProps)(App);
