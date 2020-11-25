@@ -38,6 +38,15 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = state => {
+
+    return {
+        token: state.auth.token
+    }
+
+
+}
+
 
 //setting up redux mapDispatchToProps method.
 const mapDispatchToProps = dispatch => {
@@ -48,4 +57,4 @@ const mapDispatchToProps = dispatch => {
 
 }
 
-export default  withRouter(connect(null, mapDispatchToProps)(App));
+export default  withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
