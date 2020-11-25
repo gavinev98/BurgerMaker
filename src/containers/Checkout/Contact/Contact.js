@@ -105,7 +105,8 @@ class Contact extends Component {
                 const order = {
                     ingredients : this.props.ings,
                     price: this.props.price,
-                    orderData: formData
+                    orderData: formData,
+                    userId: this.props.userId
 
                 }
                 //passing the order data to our dispatch function.
@@ -217,7 +218,8 @@ const mapStateToProps = state => {
         ings: state.burgerBuilder.ingredients,
         price: state.burgerBuilder.totalPrice,
         loading: state.orders.loading,
-        token: state.auth.token
+        token: state.auth.token,
+        userId: state.auth.userId
 
     }
 

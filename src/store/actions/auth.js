@@ -33,7 +33,7 @@ export const authFailure = (error) => {
 
 export const logout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('expirationTime');
+    localStorage.removeItem('expirationDate');
     localStorage.removeItem('userID');
     return {
 
@@ -70,7 +70,7 @@ export const auth = (email, password, isSignUp) => {
         axios.post(url, authData)
         .then(response => {
             console.log(response);
-            const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000);
+            const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 10000);
             localStorage.setItem('token', response.data.idToken);
             localStorage.setItem('expirationDate', expirationDate);
             localStorage.setItem('userID', response.data.localId);
@@ -96,6 +96,7 @@ export const setAuthRedirect = (path) => {
 }
 
 export const authCheckState = () => {
+    debugger;
     return dispatch => {
         const token = localStorage.getItem('token');
         if(!token){
