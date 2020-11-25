@@ -100,7 +100,7 @@ class Contact extends Component {
                     //setting keyvalue = to the value of the key.
                     formData[formElementIdentifier] = this.state.orderForm[formElementIdentifier].value;
                 }
-
+         
 
                 const order = {
                     ingredients : this.props.ings,
