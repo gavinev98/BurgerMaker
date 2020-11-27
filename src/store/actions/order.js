@@ -77,12 +77,13 @@ export const fetchOrderStart = () => {
 }
 
 //asynch action creator to fetch order via axios
-export const fetchOrders = (token) => {
+export const fetchOrders = (token, userId) => {
         //using axios to retrieve our data.
     return dispatch => {
         //dispatch loading symbol before displaying the data
-        dispatch(fetchOrderStart())
-        axios.get('/orders.json?auth=' + token)
+        dispatch(fetchOrderStart());
+        const queryParams = '?auth=' + token + '&orderBy=userId&equalTo=' + userId; 
+        axios.get('/orders.json' + queryParams)
             .then(response => {
             const fetchedOrders = [];
             for(let key in response.data) {

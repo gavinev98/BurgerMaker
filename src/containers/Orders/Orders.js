@@ -22,14 +22,14 @@ class Orders extends Component {
     componentDidMount() {
 
         //calll to asynchronous code action creator
-        this.props.onFetchOrders(this.props.token);
+        this.props.onFetchOrders(this.props.token, this.props.userId);
     }
 
 
     render() {
 
         let orders = <Spinner />;
-
+ 
         if(!this.props.loading){
          orders =  (this.props.orders.map(order => (
                 <Order 
@@ -54,7 +54,8 @@ const mapStateToProps = state => {
 
         orders: state.orders.orders,
         loading: state.orders.loading,
-        token: state.auth.token
+        token: state.auth.token,
+        userId: state.auth.userId
 
     };
 }
@@ -64,7 +65,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         //dispatch asynch action cretor
-        onFetchOrders: (token) => dispatch(actionC.fetchOrders(token))
+        onFetchOrders: (token, userId) => dispatch(actionC.fetchOrders(token, userId))
     }
 }
 
