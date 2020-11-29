@@ -151,11 +151,6 @@ class Contact extends Component {
             [inputIdentifier] : updatedFormElement
         })
 
-
-        //updating the copy of element to actual form.
-        updatedofForm[inputIdentifier] = updatedFormElement;
-        //setting state.
-        
         let formIsValid = true;
 
         for(let inputIdentifier in updatedofForm) {
