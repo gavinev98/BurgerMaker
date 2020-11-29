@@ -17,6 +17,8 @@ import withErrorHandler from '../../../withErrorHandler/withErrorHandler';
 
 import * as action from '../../../store/actions/index';
 
+import { updateObject } from '../../../shared/utility';
+
 
 class Contact extends Component {
 
@@ -141,14 +143,13 @@ class Contact extends Component {
             ...this.state.orderForm
         }
         //getting the key that is passed to the method in immutable way.
-        const updatedFormElement = { ...updatedofForm[inputIdentifier] }
+        const updatedFormElement = updateObject(this.state.orderForm[inputIdentifier], {
+            value: event.target.value,
+            valid:this.checkValidity(updatedFormElement.value, updatedFormElement.validation),
+            touch: true
+        });
 
-        //setting value of the element to what is typed into field.
-        updatedFormElement.value = event.target.value;
-
-        //adding layer of validation.
-        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
-        updatedFormElement.touched = true;
+        
         //updating the copy of element to actual form.
         updatedofForm[inputIdentifier] = updatedFormElement;
         //setting state.
