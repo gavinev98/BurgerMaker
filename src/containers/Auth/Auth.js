@@ -12,6 +12,8 @@ import * as actions from '../../store/actions/index';
 
 import Spinner from '../../components/UI/Modal/Spinner/Spinner';
 
+import { updateObject } from '../../shared/utility';
+
 class Auth extends Component {
 
     //this wont be handled in redux as we only care about local state.
@@ -77,20 +79,16 @@ class Auth extends Component {
 
     inputChangedHandler = (event, controlName) => {
         // getting current state acquiring control named passed and updating props.
-        const updatedControls = {
-            ...this.state.controls,
+        const updatedControls = updateObject(this.state.controls, {
             [controlName]: {
                 ...this.state.controls[controlName],
                 value: event.target.value,
                 valid: this.checkValidity(event.target.value, this.state.controls[controlName].validation),
                 touched: true
             }
-        };
-
+        }) 
         //updating the controls via setState.
         this.setState({controls: updatedControls});
-
-
     }
 
 
