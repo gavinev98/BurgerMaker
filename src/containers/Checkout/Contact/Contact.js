@@ -141,8 +141,8 @@ class Contact extends Component {
         //getting the key that is passed to the method in immutable way.
         const updatedFormElement = updateObject(this.state.orderForm[inputIdentifier], {
             value: event.target.value,
-            valid:this.checkValidity(updatedFormElement.value, updatedFormElement.validation),
-            touch: true
+            valid:this.checkValidity(event.target.value, this.state.orderForm[inputIdentifier].validation),
+            touched: true
         });
 
         //updating value of our field by getting the ID.
