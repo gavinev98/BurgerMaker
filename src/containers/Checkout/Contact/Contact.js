@@ -137,11 +137,7 @@ class Contact extends Component {
     }
 
     inputChangedHandler = (event, inputIdentifier) => {
-        //updating value of our field by getting the ID.
-        //updating in an immutable way.
-        const updatedofForm = {
-            ...this.state.orderForm
-        }
+   
         //getting the key that is passed to the method in immutable way.
         const updatedFormElement = updateObject(this.state.orderForm[inputIdentifier], {
             value: event.target.value,
@@ -149,7 +145,13 @@ class Contact extends Component {
             touch: true
         });
 
-        
+        //updating value of our field by getting the ID.
+        //updating in an immutable way.
+        const updatedofForm = updateObject(this.state.orderForm, {
+            [inputIdentifier] : updatedFormElement
+        })
+
+
         //updating the copy of element to actual form.
         updatedofForm[inputIdentifier] = updatedFormElement;
         //setting state.
