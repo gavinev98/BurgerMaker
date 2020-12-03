@@ -21,7 +21,8 @@ describe('<NavigationItems />', () => {
 
 
     it('should render three navigation items if authenticated', () => {
-        wrapper = shallow(<NavigationItems isAuthenticated />);
+       // wrapper = shallow(<NavigationItems isAuthenticated />);
+        wrapper.setProps({isAuthenticated: true}); 
         expect(wrapper.find(NavigationItem)).toHaveLength(3);
 
     });
