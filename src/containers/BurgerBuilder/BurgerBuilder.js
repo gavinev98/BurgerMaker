@@ -25,7 +25,7 @@ import { fetchIngredientsFailed, initIngredients } from "../../store/actions/bur
 
 
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
     //adding state to our burger builder class
     state = {
         purchasing: false,
